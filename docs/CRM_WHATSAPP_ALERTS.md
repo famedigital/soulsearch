@@ -50,14 +50,36 @@ WHATSAPP_ALERT_WEBHOOK_URL=https://hook.make.com/xxxxx
 POST JSON: `{ phone, message, channel: "whatsapp" }`  
 Or use URL placeholders: `...?phone={phone}&text={message}`
 
-## Email backup
+## Email (auto-reply + CRM alert backup)
+
+### Option A — Free Gmail SMTP (recommended if you don’t want Resend)
+
+1. Google Account → Security → enable 2-Step Verification  
+2. Create an **App password** (not your normal Gmail password)  
+3. Vercel env:
+   ```
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USER=your@gmail.com
+   SMTP_PASS=xxxx xxxx xxxx xxxx
+   EMAIL_FROM=Wangchuks Bhutan Tours <your@gmail.com>
+   CRM_ALERT_EMAIL=your@gmail.com
+   ```
+4. Redeploy
+
+Works for contact auto-reply, CRM alert emails, and admin password reset.
+
+### Option B — Resend (also has a free tier: 100 emails/day)
 
 ```
 RESEND_API_KEY=...
+EMAIL_FROM=Wangchuks Bhutan Tours <onboarding@resend.dev>
 CRM_ALERT_EMAIL=you@wangchuktour.com
 ```
 
-(or set the email in Admin → CRM alerts)
+(or set the alert email in Admin → CRM alerts)
+
+SMTP is preferred when both are set.
 
 ## What triggers alerts
 

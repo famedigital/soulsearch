@@ -114,7 +114,30 @@ export function ContactSettingsForm() {
       const data = await response.json();
 
       if (response.ok && data.content) {
-        setContent(data.content);
+        setContent({
+          ...defaultContent,
+          ...data.content,
+          contactInfo: {
+            ...defaultContent.contactInfo,
+            ...(data.content.contactInfo || {}),
+          },
+          autoReply: {
+            ...defaultContent.autoReply,
+            ...(data.content.autoReply || {}),
+          },
+          formFields: {
+            ...defaultContent.formFields,
+            ...(data.content.formFields || {}),
+          },
+          officeHours: {
+            ...defaultContent.officeHours,
+            ...(data.content.officeHours || {}),
+          },
+          socialMedia: {
+            ...defaultContent.socialMedia,
+            ...(data.content.socialMedia || {}),
+          },
+        });
       }
     } catch (error) {
       console.error('Error fetching Contact content:', error);
@@ -314,8 +337,9 @@ export function ContactSettingsForm() {
                     placeholder="e.g., +97517643416"
                   />
                   <p className="text-xs text-muted-foreground">
-                    Used by public “WhatsApp us” / mobile WhatsApp buttons. If you enter two numbers
-                    (e.g. with /), the first one is used for the link.
+                    Used by public “WhatsApp us” / mobile WhatsApp buttons. Enter one number for the
+                    chat link (E.164, e.g. +97577889283). If you list two with / or a space, only the
+                    first is used — never paste them together without a separator.
                   </p>
                 </div>
               </div>
@@ -472,7 +496,10 @@ export function ContactSettingsForm() {
           <Card className="p-6">
             <div className="mb-6">
               <h3 className="font-heading text-xl font-bold mb-2">Auto-Reply Message</h3>
-              <p className="text-muted-foreground text-sm">Automatic response sent when users submit the form</p>
+              <p className="text-muted-foreground text-sm">
+                Confirmation email sent to guests after contact or booking requests. Use free Gmail
+                SMTP (<code className="text-xs">SMTP_*</code>) or optional Resend in Vercel.
+              </p>
             </div>
 
             <div className="space-y-4">
@@ -482,7 +509,7 @@ export function ContactSettingsForm() {
                   <p className="text-sm text-muted-foreground">Send automatic confirmation email</p>
                 </div>
                 <Switch
-                  checked={content.autoReply.enabled}
+                  checked={content.autoReply?.enabled ?? true}
                   onCheckedChange={(checked: boolean) => updateSection('autoReply', {
                     ...content.autoReply,
                     enabled: checked
@@ -492,18 +519,18 @@ export function ContactSettingsForm() {
 
               <FormField
                 label="Email Subject"
-                value={content.autoReply.subject}
+                value={content.autoReply?.subject || ''}
                 onChange={(e) => updateSection('autoReply', {
                   ...content.autoReply,
                   subject: e.target.value
                 })}
                 placeholder="Auto-reply email subject..."
-                disabled={!content.autoReply.enabled}
+                disabled={!content.autoReply?.enabled}
               />
 
               <FormField
                 label="Auto-Reply Message"
-                value={content.autoReply.message}
+                value={content.autoReply?.message || ''}
                 onChange={(e) => updateSection('autoReply', {
                   ...content.autoReply,
                   message: e.target.value
@@ -511,8 +538,12 @@ export function ContactSettingsForm() {
                 placeholder="Message sent to users who contact you..."
                 textarea
                 rows={4}
-                disabled={!content.autoReply.enabled}
+                disabled={!content.autoReply?.enabled}
               />
+              <p className="text-xs text-muted-foreground">
+                Optional placeholders: <code className="text-xs">{'{{name}}'}</code>,{' '}
+                <code className="text-xs">{'{{company}}'}</code>
+              </p>
             </div>
           </Card>
         </ScrollReveal>

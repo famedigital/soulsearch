@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { createAdminClient } from '@/utils/supabase/admin';
 import { z } from 'zod';
 import { upsertMasterClient } from '@/lib/clients/upsert';
 import { notifyCrmAlert } from '@/lib/notifications/crm-alert';
+import { sendContactAutoReply } from '@/lib/notifications/contact-auto-reply';
 
 const contactSchema = z.object({
   name: z.string().min(1),
@@ -54,15 +55,21 @@ export async function POST(request: NextRequest) {
 
     if (error) throw error;
 
-    void notifyCrmAlert({
-      kind: 'inquiry',
-      name,
-      email,
-      phone: phone || null,
-      message,
-      tourTitle: tourTitle || tourSlug || null,
-      travelDates: travelDates || null,
-      groupSize: groupSize || null,
+    // Keep the serverless function alive until emails finish (Vercel)
+    after(async () => {
+      await Promise.allSettled([
+        notifyCrmAlert({
+          kind: 'inquiry',
+          name,
+          email,
+          phone: phone || null,
+          message,
+          tourTitle: tourTitle || tourSlug || null,
+          travelDates: travelDates || null,
+          groupSize: groupSize || null,
+        }),
+        sendContactAutoReply({ to: email, name }),
+      ]);
     });
 
     return NextResponse.json({ message: 'Inquiry submitted successfully' });

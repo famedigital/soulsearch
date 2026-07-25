@@ -52,7 +52,10 @@ export async function GET() {
         ),
         callmebot: Boolean(process.env.CALLMEBOT_APIKEY),
         webhook: Boolean(process.env.WHATSAPP_ALERT_WEBHOOK_URL),
-        email: Boolean(process.env.RESEND_API_KEY),
+        email: Boolean(
+          process.env.RESEND_API_KEY ||
+            (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)
+        ),
       },
     });
   } catch (error) {

@@ -133,7 +133,7 @@ const cmsGuides = [
       'Login → “Forgot password or login email?”',
       'Forgot password: enter admin email → 1-hour reset link → set new password (min 8 chars).',
       'Forgot login email: enter registered name or email → reminder sent to that account.',
-      'Production needs RESEND_API_KEY (+ optional EMAIL_FROM, NEXT_PUBLIC_APP_URL) in Vercel.',
+      'Production needs free Gmail SMTP (SMTP_HOST/USER/PASS) or RESEND_API_KEY, plus NEXT_PUBLIC_APP_URL in Vercel.',
     ],
   },
   {

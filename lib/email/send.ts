@@ -1,3 +1,4 @@
+import nodemailer from 'nodemailer';
 import { getCompanyName } from '@/lib/brand';
 import { DEFAULT_COMPANY_NAME } from '@/lib/brand-defaults';
 
@@ -10,59 +11,124 @@ type SendEmailInput = {
 
 type SendEmailResult = {
   sent: boolean;
-  provider: 'resend' | 'log' | 'none';
+  provider: 'resend' | 'smtp' | 'log' | 'none';
   error?: string;
 };
 
-/**
- * Sends transactional email via Resend when RESEND_API_KEY is set.
- * Falls back to console logging in development so reset links still work locally.
- */
-export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult> {
-  let from =
+function smtpConfigured(): boolean {
+  return Boolean(
+    process.env.SMTP_HOST &&
+      process.env.SMTP_USER &&
+      process.env.SMTP_PASS
+  );
+}
+
+async function resolveFromAddress(): Promise<string> {
+  const from =
     process.env.EMAIL_FROM ||
     process.env.RESEND_FROM ||
+    process.env.SMTP_FROM ||
     '';
+  if (from) return from;
 
-  if (!from) {
-    const company = await getCompanyName().catch(() => DEFAULT_COMPANY_NAME);
-    from = `${company} <onboarding@resend.dev>`;
+  const company = await getCompanyName().catch(() => DEFAULT_COMPANY_NAME);
+  if (process.env.SMTP_USER) {
+    return `${company} <${process.env.SMTP_USER}>`;
+  }
+  return `${company} <onboarding@resend.dev>`;
+}
+
+async function sendViaSmtp(input: SendEmailInput, from: string): Promise<SendEmailResult> {
+  try {
+    const port = Number(process.env.SMTP_PORT || 587);
+    const secure =
+      process.env.SMTP_SECURE === 'true' ||
+      process.env.SMTP_SECURE === '1' ||
+      port === 465;
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port,
+      secure,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from,
+      to: input.to,
+      subject: input.subject,
+      text: input.text,
+      html: input.html,
+    });
+
+    return { sent: true, provider: 'smtp' };
+  } catch (error) {
+    console.error('SMTP email error:', error);
+    return {
+      sent: false,
+      provider: 'smtp',
+      error: error instanceof Error ? error.message : 'send failed',
+    };
+  }
+}
+
+async function sendViaResend(input: SendEmailInput, from: string): Promise<SendEmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return { sent: false, provider: 'resend', error: 'RESEND_API_KEY not set' };
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to: [input.to],
+        subject: input.subject,
+        html: input.html,
+        text: input.text,
+      }),
+    });
 
-  if (apiKey) {
-    try {
-      const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from,
-          to: [input.to],
-          subject: input.subject,
-          html: input.html,
-          text: input.text,
-        }),
-      });
-
-      if (!res.ok) {
-        const body = await res.text();
-        console.error('Resend email failed:', res.status, body);
-        return { sent: false, provider: 'resend', error: body };
-      }
-
-      return { sent: true, provider: 'resend' };
-    } catch (error) {
-      console.error('Resend email error:', error);
-      return {
-        sent: false,
-        provider: 'resend',
-        error: error instanceof Error ? error.message : 'send failed',
-      };
+    if (!res.ok) {
+      const body = await res.text();
+      console.error('Resend email failed:', res.status, body);
+      return { sent: false, provider: 'resend', error: body };
     }
+
+    return { sent: true, provider: 'resend' };
+  } catch (error) {
+    console.error('Resend email error:', error);
+    return {
+      sent: false,
+      provider: 'resend',
+      error: error instanceof Error ? error.message : 'send failed',
+    };
+  }
+}
+
+/**
+ * Sends transactional email.
+ * Prefers free SMTP (e.g. Gmail app password) when SMTP_* is set,
+ * otherwise Resend when RESEND_API_KEY is set.
+ */
+export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult> {
+  const from = await resolveFromAddress();
+
+  // Prefer SMTP so sites can stay on free Gmail without Resend
+  if (smtpConfigured()) {
+    return sendViaSmtp(input, from);
+  }
+
+  if (process.env.RESEND_API_KEY) {
+    return sendViaResend(input, from);
   }
 
   console.info('[email:log]', {
@@ -76,9 +142,14 @@ export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult>
     provider: process.env.NODE_ENV === 'production' ? 'none' : 'log',
     error:
       process.env.NODE_ENV === 'production'
-        ? 'Email provider not configured (set RESEND_API_KEY)'
+        ? 'Email provider not configured. Set SMTP_HOST/SMTP_USER/SMTP_PASS (free Gmail) or RESEND_API_KEY.'
         : undefined,
   };
+}
+
+/** True when any production email provider is configured. */
+export function isEmailConfigured(): boolean {
+  return smtpConfigured() || Boolean(process.env.RESEND_API_KEY);
 }
 
 export async function passwordResetEmail(params: {

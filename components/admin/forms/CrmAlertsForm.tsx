@@ -107,7 +107,7 @@ export function CrmAlertsForm() {
         toast.error(
           wa?.error ||
             em?.error ||
-            'No provider sent. Configure Twilio, CallMeBot, or Resend env vars.'
+            'No provider sent. Configure Twilio, CallMeBot, Gmail SMTP, or Resend env vars.'
         );
       }
     } catch (err) {
@@ -247,7 +247,7 @@ export function CrmAlertsForm() {
           <li>Twilio WhatsApp: {providers.twilio ? '✅ ready' : '⬜ not set'}</li>
           <li>CallMeBot (simple): {providers.callmebot ? '✅ ready' : '⬜ not set'}</li>
           <li>Custom webhook: {providers.webhook ? '✅ ready' : '⬜ not set'}</li>
-          <li>Email (Resend): {providers.email ? '✅ ready' : '⬜ not set'}</li>
+          <li>Email (Gmail SMTP / Resend): {providers.email ? '✅ ready' : '⬜ not set'}</li>
         </ul>
         {!anyWhatsAppProvider ? (
           <p className="mt-3 text-amber-700 dark:text-amber-400">
