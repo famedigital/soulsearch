@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { createAdminClient } from '@/utils/supabase/admin';
 import { z } from 'zod';
 import { upsertMasterClient } from '@/lib/clients/upsert';
@@ -103,21 +103,23 @@ export async function POST(request: NextRequest) {
 
     await supabase.from('inquiries').insert(inquiryInsert);
 
-    // Phone/email alert — do not block the customer response
-    void notifyCrmAlert({
-      kind: 'booking',
-      name,
-      email,
-      phone: phone || null,
-      message,
-      tourTitle: resolvedTitle,
-      travelDates: travelDates || null,
-      groupSize: travelerCount,
-      bookingNumber: booking?.booking_number || null,
+    // Keep the serverless function alive until emails finish (Vercel)
+    after(async () => {
+      await Promise.allSettled([
+        notifyCrmAlert({
+          kind: 'booking',
+          name,
+          email,
+          phone: phone || null,
+          message,
+          tourTitle: resolvedTitle,
+          travelDates: travelDates || null,
+          groupSize: travelerCount,
+          bookingNumber: booking?.booking_number || null,
+        }),
+        sendContactAutoReply({ to: email, name }),
+      ]);
     });
-
-    // Guest confirmation from Admin → Contact → Auto-Reply (non-blocking)
-    void sendContactAutoReply({ to: email, name });
 
     if (bookingError) {
       console.error('Booking insert error (inquiry still saved):', bookingError);
