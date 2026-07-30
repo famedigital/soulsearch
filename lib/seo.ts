@@ -18,16 +18,15 @@ export function getSiteUrl(): string {
     return withProtocol.replace(/\/$/, '');
   }
 
-  return 'https://www.wangchuksbhutantours.bt';
+  return 'https://soulsearch-beta.vercel.app';
 }
 
 /** Default social share image (1200×630) — scenic Bhutan shot */
 export const DEFAULT_OG_IMAGE =
-  'https://res.cloudinary.com/hckgrdeh/image/upload/c_fill,w_1200,h_630,g_auto,f_jpg,q_auto/v1782965945/punakhadzong_xkcrcu.jpg';
+  'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&h=630&fit=crop';
 
-/** Full wordmark for OG/social; favicon/PWA use /brand/wangchuk-emblem.svg */
-export const SITE_LOGO_URL =
-  'https://res.cloudinary.com/hckgrdeh/image/upload/c_pad,w_512,h_512,b_rgb:0f172a,f_png/v1782962660/wangchukstlogo_usxclz.png';
+/** Full wordmark for OG/social — prefer CMS logo via getSiteLogo() at runtime */
+export const SITE_LOGO_URL = '';
 
 /**
  * Optimize remote images (esp. Cloudinary) for WhatsApp / OG (≈1200×630).

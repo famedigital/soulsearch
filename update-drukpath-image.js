@@ -39,7 +39,7 @@ async function updateDrukpathImage() {
 
     // Alternative Bhutan landscape image (not Tiger's Nest)
     // Using a beautiful Bhutan valley landscape
-    const newImageUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/v1782965945/punakhadzong_xkcrcu.jpg';
+    const newImageUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
 
     console.log('🔄 Updating to:', newImageUrl);
 

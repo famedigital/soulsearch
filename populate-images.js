@@ -3,7 +3,7 @@ const { createClient } = require('@supabase/supabase-js');
 
 // Configure Cloudinary
 cloudinary.v2.config({
-  cloud_name: 'hckgrdeh',
+  cloud_name: '',
   api_key: '899967834874613',
   api_secret: 'IVrrbNOuALmDBp8w0Y3x-ouF3L8'
 });
@@ -25,27 +25,27 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const bhutanImages = {
   // Main hero images
   hero: [
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911267/tigernest_paro_wdenqu.jpg',
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912157/dochula-tshechu_d3d6dg.jpg',
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912162/thimphu-moonsoon_dftrcz.jpg',
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912146/tigernest-rear_stc6o5.jpg',
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911266/punakha_bmddrk.jpg'
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80'
   ],
 
   // Tour-specific images
   tours: [
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911267/tigernest_paro_wdenqu.jpg', // Tiger's Nest
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911266/punakha_bmddrk.jpg', // Punakha
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912162/thimphu-moonsoon_dftrcz.jpg', // Thimphu landscape
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912157/dochula-tshechu_d3d6dg.jpg', // Festival
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911323/phobjikha1_ddflbj.jpg', // Phobjikha
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911270/bumthang_bdxytr.jpg', // Bumthang
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911338/paro-rimpungdzong_uemj9o.jpg', // Paro Dzong
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911256/buddhapoint_z2kucc.jpg', // Buddha Point
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911274/tigernest1_epiybh.jpg', // Tiger's Nest view 2
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911314/phobjika2_pqhuya.jpg', // Phobjikha view 2
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911321/tshechu_b5y9hd.jpg', // Tshechu
-    'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911281/wangdidzong_mbcvuq.jpg' // Wangdi Dzong
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Tiger's Nest
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Punakha
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Thimphu landscape
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Festival
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Phobjikha
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Bumthang
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Paro Dzong
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Buddha Point
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Tiger's Nest view 2
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Phobjikha view 2
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', // Tshechu
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80' // Wangdi Dzong
   ]
 };
 
@@ -265,7 +265,7 @@ Perched dramatically on a cliff 3,000 feet above the Paro Valley, Taktsang Palph
       thumbnail_url: bhutanImages.hero[0].replace('/upload/', '/upload/w_600,h_400,c_fill/'),
       category: 'Culture',
       tags: ['monastery', 'trekking', 'spirituality', 'paro'],
-      author_name: 'Wangchuks Bhutan Tours',
+      author_name: 'Soul Search Tours',
       published_date: new Date().toISOString().split('T')[0]
     },
     {
@@ -279,7 +279,7 @@ Bhutan's Tsechu festivals are extraordinary celebrations of faith, culture, and 
       thumbnail_url: bhutanImages.hero[1].replace('/upload/', '/upload/w_600,h_400,c_fill/'),
       category: 'Festivals',
       tags: ['tsechu', 'culture', 'cham dance', 'festivals'],
-      author_name: 'Wangchuks Bhutan Tours',
+      author_name: 'Soul Search Tours',
       published_date: new Date().toISOString().split('T')[0]
     },
     {
@@ -293,7 +293,7 @@ Bhutan offers distinct experiences throughout the year, each season bringing its
       thumbnail_url: bhutanImages.hero[2].replace('/upload/', '/upload/w_600,h_400,c_fill/'),
       category: 'Travel Tips',
       tags: ['weather', 'planning', 'seasons', 'guide'],
-      author_name: 'Wangchuks Bhutan Tours',
+      author_name: 'Soul Search Tours',
       published_date: new Date().toISOString().split('T')[0]
     },
     {
@@ -307,7 +307,7 @@ Bhutan's dzongs are among the most remarkable architectural achievements in the 
       thumbnail_url: bhutanImages.hero[4].replace('/upload/', '/upload/w_600,h_400,c_fill/'),
       category: 'Culture',
       tags: ['architecture', 'dzongs', 'history', 'monasteries'],
-      author_name: 'Wangchuks Bhutan Tours',
+      author_name: 'Soul Search Tours',
       published_date: new Date().toISOString().split('T')[0]
     }
   ];

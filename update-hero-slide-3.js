@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function updateHeroSlide() {
   try {
     // New image for slide 3 - Phobjikha Valley (beautiful landscape)
-    const newImageUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911323/phobjikha1_ddflbj.jpg';
+    const newImageUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
     const newImagePublicId = 'phobjikha1_ddflbj';
 
     const { data, error } = await supabase

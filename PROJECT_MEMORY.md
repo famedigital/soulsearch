@@ -1,4 +1,4 @@
-# 🎯 Wangchuks Bhutan Tours & Treks - Project Memory & Current Status
+# 🎯 Soul Search Tours - Project Memory & Current Status
 
 **Last Updated:** 2026-07-02
 **Status:** 🟢 Production Ready - Awaiting Database Deployment
@@ -36,7 +36,7 @@
 **⚠️ IMPORTANT: Change password after first login!**
 
 ```
-Email: admin@wangchuktour.com
+Email: admin@example.com
 Password: Admin@123
 Login URL: http://localhost:3000/admin/login
 ```
@@ -97,7 +97,7 @@ Login URL: http://localhost:3000/admin/login
 - 20+ database tables (admin_users, tours, blog_posts, bookings, etc.)
 - Indexes for performance optimization
 - Triggers for auto-generated booking/inquiry numbers
-- First admin user (admin@wangchuktour.com)
+- First admin user (admin@example.com)
 - Default site settings
 
 ### **Step 2: Test Admin Login**
@@ -135,7 +135,7 @@ Login URL: http://localhost:3000/admin/login
   - Refresh tokens: 7 days
   - Secure httpOnly cookies
 - **Media Storage:** Cloudinary
-  - Cloud: hckgrdeh
+  - Cloud:
   - Auto-optimization: q_auto, f_auto
   - CDN delivery
 
@@ -189,7 +189,7 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_MqZ5yaGAk5xptfpSM1iKmg_D7TP6
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 # Cloudinary Configuration
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=hckgrdeh
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=899967834874613
 CLOUDINARY_API_SECRET=IVrrbNOuALmDBp8w0Y3x-ouF3L8
 ```
@@ -305,6 +305,6 @@ CLOUDINARY_API_SECRET=IVrrbNOuALmDBp8w0Y3x-ouF3L8
 
 ---
 
-**🎉 CONGRATULATIONS! Your Wangchuks Bhutan Tours backend is complete and ready to take your tour business to the next level! 🎉**
+**🎉 CONGRATULATIONS! Your Soul Search Tours backend is complete and ready to take your tour business to the next level! 🎉**
 
 *This project memory will be updated as the project evolves. Last reviewed: 2026-07-02*

@@ -12,7 +12,7 @@ async function changeCulturalTriangleThumbnail() {
   console.log('Changing Cultural Triangle Experience thumbnail URL...');
 
   // New thumbnail URL - Beautiful Bhutan festival image
-  const newThumbnailUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/w_600,h_400,c_fill,q_auto,f_auto/v1782912157/dochula-tshechu_d3d6dg.jpg';
+  const newThumbnailUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
   const newThumbnailPublicId = 'dochula-tshechu_d3d6dg';
 
   try {

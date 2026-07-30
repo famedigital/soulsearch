@@ -178,7 +178,7 @@ export function ToursPageClient({ tours }: { tours: any[] }) {
         <section className="relative overflow-hidden py-24 md:py-32">
           <div className="absolute inset-0">
             <img
-              src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782965945/punakhadzong_xkcrcu.jpg"
+              src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80"
               alt="Punakha Dzong"
               className="h-full w-full object-cover"
             />

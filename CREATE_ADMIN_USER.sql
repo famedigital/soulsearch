@@ -20,7 +20,7 @@ INSERT INTO admin_users (
   updated_at
 ) VALUES (
   gen_random_uuid(), -- This will generate a proper UUID
-  'admin@wangchuktour.com',
+  'admin@example.com',
   'Admin User',
   '$2b$12$HgtvGJqEgu3DKhvRbmPFP.rkixdtzcEr31F5HvgcoxjuDVSEp4rZu', -- bcrypt hash for 'Admin@123'
   'admin',
@@ -45,14 +45,14 @@ SELECT
   email_verified,
   created_at
 FROM admin_users
-WHERE email = 'admin@wangchuktour.com';
+WHERE email = 'admin@example.com';
 
 -- Display login information
 SELECT
   '========================================' as "",
   'ADMIN USER CREATED SUCCESSFULLY' as "",
   '========================================' as "",
-  'Email: admin@wangchuktour.com' as "",
+  'Email: admin@example.com' as "",
   'Password: Admin@123' as "",
   'Login URL: http://localhost:3000/admin/login' as "",
   '========================================' as "";

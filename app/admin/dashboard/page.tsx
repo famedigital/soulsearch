@@ -4,31 +4,16 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { authGet } from '@/lib/auth/fetch';
 import { AdminLayout } from '@/components/admin/AdminLayout';
+import { SetupProgressBanner } from '@/components/admin/setup/SetupProgressBanner';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AboutPageForm } from '@/components/admin/forms/AboutPageForm';
-import { FAQManager } from '@/components/admin/FAQManager';
-import { ContactSettingsForm } from '@/components/admin/forms/ContactSettingsForm';
-import { HeroSliderManager } from '@/components/admin/HeroSliderManager';
-import { TestimonialManager } from '@/components/admin/TestimonialManager';
-import { UserManager } from '@/components/admin/UserManager';
 import {
-  LayoutDashboard,
   Calendar,
   Users,
   DollarSign,
-  TrendingUp,
-  FileText,
-  Settings,
-  Search,
-  Filter,
+  Clock,
   Eye,
   Edit,
-  Trash2,
-  Check,
-  Clock,
-  MapPin,
-  Plus,
   Loader2,
 } from 'lucide-react';
 
@@ -159,6 +144,8 @@ export default function AdminDashboardPage() {
             <p className="text-gray-500 mt-1">Welcome back, Admin</p>
           </div>
         </div>
+
+        <SetupProgressBanner variant="card" />
 
         {loading ? (
           <div className="flex items-center justify-center py-12">

@@ -2,13 +2,17 @@ import { createAdminClient } from '@/utils/supabase/admin'
 import {
   DEFAULT_COMPANY_NAME,
   DEFAULT_COMPANY_TAGLINE,
+  DEFAULT_SITE_LOGO,
   normalizeCompanyName,
+  normalizeSiteLogo,
 } from '@/lib/brand-defaults'
 
 export {
   DEFAULT_COMPANY_NAME,
   DEFAULT_COMPANY_TAGLINE,
+  DEFAULT_SITE_LOGO,
   normalizeCompanyName,
+  normalizeSiteLogo,
 } from '@/lib/brand-defaults'
 
 function asCleanName(value: unknown): string | null {
@@ -32,6 +36,11 @@ function nameFromSeoBlob(raw: unknown): string | null {
   }
   if (!obj) return null
   return asCleanName(obj.site_name)
+}
+
+function logoFromSeoBlob(raw: unknown): string {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return DEFAULT_SITE_LOGO
+  return normalizeSiteLogo((raw as Record<string, unknown>).site_logo)
 }
 
 /**
@@ -146,12 +155,34 @@ export async function getCompanyTagline(): Promise<string> {
   }
 }
 
+export async function getSiteLogo(): Promise<string> {
+  try {
+    const supabase = createAdminClient()
+    const { data } = await supabase
+      .from('site_settings')
+      .select('key, value')
+      .in('key', ['site_logo', 'seo_settings'])
+
+    const map = Object.fromEntries((data || []).map((row) => [row.key, row.value]))
+    const flat = normalizeSiteLogo(map.site_logo)
+    if (flat) return flat
+    return logoFromSeoBlob(map.seo_settings)
+  } catch {
+    return DEFAULT_SITE_LOGO
+  }
+}
+
 export type BrandInfo = {
   name: string
   tagline: string
+  logo: string
 }
 
 export async function getBrand(): Promise<BrandInfo> {
-  const [name, tagline] = await Promise.all([getCompanyName(), getCompanyTagline()])
-  return { name, tagline }
+  const [name, tagline, logo] = await Promise.all([
+    getCompanyName(),
+    getCompanyTagline(),
+    getSiteLogo(),
+  ])
+  return { name, tagline, logo }
 }

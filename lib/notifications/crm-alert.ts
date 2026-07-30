@@ -33,7 +33,7 @@ function getSiteUrl(): string {
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.NEXT_PUBLIC_APP_URL ||
     process.env.SITE_URL ||
-    'https://www.wangchuksbhutantours.bt'
+    'https://soulsearch-beta.vercel.app'
   ).replace(/\/$/, '')
 }
 
@@ -276,7 +276,7 @@ export async function sendTestCrmAlert(toWhatsApp?: string, toEmail?: string) {
     name: 'Test Guest',
     email: 'test@example.com',
     phone: '+975 17 000 000',
-    message: 'This is a test CRM alert from Wangchuks admin.',
+    message: 'This is a test CRM alert from Soul Search admin.',
     tourTitle: 'Test Tour',
   }
   const siteUrl = getSiteUrl()

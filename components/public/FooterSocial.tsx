@@ -11,18 +11,7 @@ type SocialLink = {
   icon: typeof MessageCircle;
 };
 
-const DEFAULTS: SocialLink[] = [
-  {
-    name: 'Facebook',
-    href: 'https://facebook.com/wangchuktours',
-    icon: MessageCircle,
-  },
-  {
-    name: 'Instagram',
-    href: 'https://instagram.com/wangchuktours',
-    icon: Camera,
-  },
-];
+const DEFAULTS: SocialLink[] = [];
 
 function normalizeUrl(url?: string | null): string | null {
   const raw = String(url || '').trim();
@@ -68,9 +57,9 @@ export function FooterSocial() {
         if (instagram) {
           next.push({ name: 'Instagram', href: instagram, icon: Camera });
         }
-        setLinks(next.length > 0 ? next : DEFAULTS);
+        setLinks(next);
       } catch {
-        // keep defaults
+        setLinks([]);
       }
     }
 

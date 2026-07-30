@@ -1,5 +1,5 @@
 -- =====================================================
--- WANGCHUK TOURS & TREKS - DATABASE DEPLOYMENT SCRIPT
+-- SOUL SEARCH TOURS - DATABASE DEPLOYMENT SCRIPT
 -- =====================================================
 -- Execute this entire script in your Supabase SQL Editor
 -- This will create all tables, indexes, functions, and the first admin user
@@ -453,12 +453,12 @@ CREATE TRIGGER generate_inquiry_number_trigger
 -- ============================================
 
 -- Insert the first admin user
--- Email: admin@wangchuktour.com
+-- Email: admin@example.com
 -- Password: Admin@123
 -- IMPORTANT: Change this password after first login!
 INSERT INTO admin_users (email, password_hash, name, role, is_active, email_verified)
 VALUES (
-  'admin@wangchuktour.com',
+  'admin@example.com',
   '$2b$12$MjIeB94YRg8UUG1R4TsM/eQUrivlXwxT2e4U3qZ5vkuZj6TnUeUh2',
   'Admin User',
   'admin',
@@ -473,10 +473,10 @@ ON CONFLICT (email) DO NOTHING;
 
 -- Insert default site settings
 INSERT INTO site_settings (key, value, category, description, is_public) VALUES
-  ('site_name', '"Wangchuks Bhutan Tours & Treks"', 'general', 'Site name', true),
+  ('site_name', '"Soul Search Tours"', 'general', 'Site name', true),
   ('site_tagline', '"Discover the Last Shangri-La"', 'general', 'Site tagline', true),
   ('site_description', '"Experience authentic Bhutanese culture, breathtaking Himalayan landscapes, and spiritual journeys that will transform your soul."', 'general', 'Site description for SEO', true),
-  ('contact_email', '"info@wangchuktour.com"', 'general', 'Main contact email', true),
+  ('contact_email', '""', 'general', 'Main contact email', true),
   ('contact_phone', '"+975 2 327654"', 'general', 'Main contact phone', true),
   ('contact_address', '"Thimphu, Bhutan"', 'general', 'Business address', true)
 ON CONFLICT (key) DO NOTHING;
@@ -495,7 +495,7 @@ BEGIN
   RAISE NOTICE '✅ Admin user created';
   RAISE NOTICE '═══════════════════════════════════════════════════════';
   RAISE NOTICE '👤 ADMIN LOGIN CREDENTIALS:';
-  RAISE NOTICE '   Email: admin@wangchuktour.com';
+  RAISE NOTICE '   Email: admin@example.com';
   RAISE NOTICE '   Password: Admin@123';
   RAISE NOTICE '   ⚠️  IMPORTANT: Change this password immediately!';
   RAISE NOTICE '═══════════════════════════════════════════════════════';

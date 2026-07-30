@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { useCompanyBrand } from '@/hooks/use-company-brand';
+import { BrandMark } from '@/components/public/BrandMark';
 
 type Mode = 'password' | 'username';
 
@@ -70,11 +71,15 @@ export default function ForgotPasswordPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted p-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <img
-            src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
-            alt={brand.name}
-            className="mx-auto mb-4 h-16 w-auto object-contain"
-          />
+          <div className="mb-4 inline-flex justify-center">
+            <BrandMark
+              name={brand.name}
+              logo={brand.logo}
+              size="lg"
+              showName={!brand.logo}
+              className="justify-center"
+            />
+          </div>
           <h1 className="font-heading text-2xl font-semibold text-foreground">Account recovery</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Reset your password or recover your login email
@@ -152,7 +157,7 @@ export default function ForgotPasswordPage() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="admin@wangchuktour.com"
+                      placeholder=""
                       className="pl-8"
                       required
                       autoComplete="email"

@@ -19,7 +19,7 @@ async function verifyPassword() {
     const correctHash = await bcrypt.hash(password, 12);
     console.log('Correct hash:', correctHash);
     console.log('\nRun this SQL in Supabase:');
-    console.log(`UPDATE admin_users SET password_hash = '${correctHash}' WHERE email = 'admin@wangchuktour.com';`);
+    console.log(`UPDATE admin_users SET password_hash = '${correctHash}' WHERE email = 'admin@example.com';`);
   } else {
     console.log('\n✅ Password is correct! The issue might be elsewhere.');
   }

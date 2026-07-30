@@ -39,7 +39,7 @@ node populate-images.js
 - ✅ And many more...
 
 ### Admin User Credentials:
-- **Email:** `admin@wangchuktour.com`
+- **Email:** `admin@example.com`
 - **Password:** `Admin@123`
 - **Role:** Super Admin
 

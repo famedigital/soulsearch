@@ -142,7 +142,6 @@ export default function PolicyPage() {
                       Our team is happy to assist with any booking-related questions:
                     </p>
                     <div className="mt-4 space-y-2">
-                      <p className="text-gray-700">Email: info@wangchuktour.com</p>
                       <p className="text-gray-700">Phone: +975 17643416</p>
                       <p className="text-gray-700">Address: Thimphu, Bhutan</p>
                     </div>

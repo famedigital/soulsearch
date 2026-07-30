@@ -7,7 +7,7 @@ const supabaseKey = 'sb_publishable_MqZ5yaGAk5xptfpSM1iKmg_D7TP6zeO';
 console.log('Updating Punakha Dzong images...');
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const newPunakhaUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/v1782965945/punakhadzong_xkcrcu.jpg';
+const newPunakhaUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
 const newPunakhaPublicId = 'punakhadzong_xkcrcu';
 
 async function updatePunakhaImages() {

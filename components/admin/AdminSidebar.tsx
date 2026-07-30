@@ -25,12 +25,15 @@ import {
   PanelLeft,
   BookOpen,
   Palette,
+  LayoutTemplate,
+  Rocket,
 } from 'lucide-react';
 import type { AdminUser } from '@/lib/auth/rbac';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useCompanyBrand } from '@/hooks/use-company-brand';
 import { authFetch } from '@/lib/auth/fetch';
+import { BrandMark } from '@/components/public/BrandMark';
 
 interface NavItem {
   id: string;
@@ -55,6 +58,7 @@ const navigationSections: { title: string; items: NavItem[] }[] = [
     title: 'Overview',
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, href: '/admin/dashboard' },
+      { id: 'setup', label: 'Setup wizard', icon: Rocket, href: '/admin/setup' },
       { id: 'docs', label: 'Docs & manual', icon: BookOpen, href: '/admin/docs' },
     ],
   },
@@ -102,6 +106,7 @@ const navigationSections: { title: string; items: NavItem[] }[] = [
         label: 'Settings',
         icon: Settings,
         children: [
+          { id: 'template', label: 'Website layout', icon: LayoutTemplate, href: '/admin/settings/template' },
           { id: 'theme', label: 'Color theme', icon: Palette, href: '/admin/settings/theme' },
           { id: 'general', label: 'Contact & general', icon: Settings, href: '/admin/settings/general' },
           { id: 'site', label: 'About page', icon: Home, href: '/admin/settings/site' },
@@ -259,10 +264,12 @@ export function AdminSidebar({
         >
           {!isCollapsed ? (
             <div className="flex min-w-0 items-center gap-2.5 px-1">
-              <img
-                src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
-                alt={brand.name}
-                className="h-9 w-auto object-contain shrink-0"
+              <BrandMark
+                name={brand.name}
+                logo={brand.logo}
+                size="sm"
+                showName={false}
+                className="shrink-0"
               />
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-foreground">Admin</p>
@@ -272,11 +279,7 @@ export function AdminSidebar({
               </div>
             </div>
           ) : (
-            <img
-              src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
-              alt="Logo"
-              className="h-8 w-auto object-contain"
-            />
+            <BrandMark name={brand.name} logo={brand.logo} size="sm" showName={false} />
           )}
 
           <Button

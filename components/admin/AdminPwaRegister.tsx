@@ -33,6 +33,16 @@ export function AdminPwaRegister() {
         .catch((err) => console.warn('Admin PWA SW registration failed:', err));
     }
 
+    // Point the installable app at the dynamic CMS-driven manifest.
+    let link = document.querySelector<HTMLLinkElement>('link[rel="manifest"][data-admin-pwa]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'manifest';
+      link.dataset.adminPwa = 'true';
+      document.head.appendChild(link);
+    }
+    link.href = '/api/admin/manifest';
+
     const onBeforeInstall = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);

@@ -12,7 +12,7 @@ async function fixDrukPathThumbnail() {
   console.log('Fixing Druk Path Trek thumbnail (broken image)...');
 
   // New thumbnail URL - Beautiful Phobjikha Valley (glacial valley landscape, perfect for trekking)
-  const newThumbnailUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/w_600,h_400,c_fill,q_auto,f_auto/v1782911323/phobjikha1_ddflbj.jpg';
+  const newThumbnailUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
   const newThumbnailPublicId = 'phobjikha1_ddflbj';
 
   try {

@@ -106,7 +106,7 @@ export default async function BlogPage() {
           <div className="absolute inset-0">
             <img
               src={optimizeImageUrl(
-                'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911267/tigernest_paro_wdenqu.jpg',
+                'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
                 1920,
                 1080
               )}
@@ -208,7 +208,7 @@ export default async function BlogPage() {
           <div className="absolute inset-0">
             <img
               src={optimizeImageUrl(
-                'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911256/buddhapoint_z2kucc.jpg',
+                'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
                 1920,
                 1080
               )}

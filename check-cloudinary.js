@@ -2,7 +2,7 @@ const cloudinary = require('cloudinary');
 
 // Configure Cloudinary with your credentials
 cloudinary.v2.config({
-  cloud_name: 'hckgrdeh',
+  cloud_name: '',
   api_key: '899967834874613',
   api_secret: 'IVrrbNOuALmDBp8w0Y3x-ouF3L8'
 });

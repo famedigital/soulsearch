@@ -1,4 +1,4 @@
-# Wangchuk Tour - Project Status
+# Soul Search Tours - Project Status
 
 ## Phase Completion Status
 
@@ -9,8 +9,8 @@
 - [x] Design system configured (Premium Red theme)
 - [x] Custom fonts configured
 - [x] Memory files created (AGENT_MEMORY.md, PROJECT_STATUS.md)
-- [x] GitHub repository connected (https://github.com/famedigital/wangchukstour.git)
-- [x] Vercel deployment active (https://wangchukstour.vercel.app)
+- [x] GitHub repository connected (https://github.com/famedigital/soulsearch.git)
+- [x] Vercel deployment active (https://soulsearch-beta.vercel.app)
 
 ### Phase 1: Database Schema (PENDING)
 - [ ] Supabase project created
@@ -116,7 +116,7 @@
 - app/globals.css - Fixed container centering
 
 **Vercel Deployment:**
-- URL: https://wangchukstour.vercel.app
+- URL: https://soulsearch-beta.vercel.app
 - Status: Building successfully
 - All TypeScript errors resolved
 
@@ -162,7 +162,7 @@
 
 ### To start development server:
 ```bash
-cd "D:\VS STUDIO PROJECT\wangchuk-tour"
+cd "D:\VS STUDIO PROJECT\soulsearch"
 npm run dev
 ```
 
@@ -187,10 +187,10 @@ git push
 
 ## Important Links
 
-- **Live Site**: https://wangchukstour.vercel.app
-- **Admin Panel**: https://wangchukstour.vercel.app/admin/dashboard
-- **GitHub**: https://github.com/famedigital/wangchukstour.git
-- **Vercel Dashboard**: https://vercel.com/famedigital/wangchukstour
+- **Live Site**: https://soulsearch-beta.vercel.app
+- **Admin Panel**: https://soulsearch-beta.vercel.app/admin/dashboard
+- **GitHub**: https://github.com/famedigital/soulsearch.git
+- **Vercel Dashboard**: https://vercel.com/famedigital/soulsearch
 
 ---
 

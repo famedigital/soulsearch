@@ -173,7 +173,7 @@ export function MediaPickerModal({
         setUploading(true);
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('folder', currentFolderFilter === 'All Images' ? 'wangchuk-tour' : currentFolderFilter);
+        formData.append('folder', currentFolderFilter === 'All Images' ? 'soulsearch' : currentFolderFilter);
 
         const response = await fetch('/api/upload', {
           method: 'POST',

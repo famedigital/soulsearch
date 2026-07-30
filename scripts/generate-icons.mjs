@@ -1,13 +1,13 @@
 import sharp from 'sharp';
-import { readFileSync } from 'fs';
+import { mkdirSync, readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-const standardSvg = readFileSync(join(root, 'public/brand/wangchuk-emblem.svg'));
-const maskableSvg = readFileSync(join(root, 'public/brand/wangchuk-emblem-maskable.svg'));
+const standardSvg = readFileSync(join(root, 'public/brand/soulsearch-emblem.svg'));
+const maskableSvg = readFileSync(join(root, 'public/brand/soulsearch-emblem-maskable.svg'));
 
 /** @type {{ out: string; size: number; svg: Buffer }[]} */
 const outputs = [
@@ -23,6 +23,7 @@ const outputs = [
 
 for (const { out, size, svg } of outputs) {
   const dest = join(root, out);
+  mkdirSync(dirname(dest), { recursive: true });
   await sharp(svg).resize(size, size).png().toFile(dest);
   console.log(`✓ ${out} (${size}×${size})`);
 }

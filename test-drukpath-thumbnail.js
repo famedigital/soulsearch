@@ -13,7 +13,7 @@ async function fixDrukPathThumbnail() {
 
   // Try a different, more reliable image
   // Using Bumthang which is a beautiful mountain region
-  const newThumbnailUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/w_600,h_400,c_fill,q_auto,f_auto/v1782911270/bumthang_bdxytr.jpg';
+  const newThumbnailUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
   const newThumbnailPublicId = 'bumthang_bdxytr';
 
   try {

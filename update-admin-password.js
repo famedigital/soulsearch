@@ -20,7 +20,7 @@ async function updateAdminPassword() {
     const { data, error } = await supabase
       .from('admin_users')
       .update({ password_hash: hash })
-      .eq('email', 'admin@wangchuktour.com')
+      .eq('email', 'admin@example.com')
       .select();
 
     if (error) {
@@ -30,7 +30,7 @@ async function updateAdminPassword() {
 
     console.log('Password updated successfully!');
     console.log('Email:', data[0].email);
-    console.log('You can now login with:', 'admin@wangchuktour.com / Admin@123');
+    console.log('You can now login with:', 'admin@example.com / Admin@123');
 
   } catch (error) {
     console.error('Error:', error.message);

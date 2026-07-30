@@ -13,7 +13,7 @@ async function fixCulturalTriangle() {
     const { error } = await supabase
       .from('tours')
       .update({
-        hero_image_url: 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911266/punakha_bmddrk.jpg',
+        hero_image_url: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
         hero_image_public_id: 'punakha_bmddrk'
       })
       .eq('title', 'Cultural Triangle Experience');

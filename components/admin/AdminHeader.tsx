@@ -294,7 +294,7 @@ export function AdminHeader({ onMobileMenuOpen, user }: AdminHeaderProps) {
               <div className="border-b border-border px-2 py-2">
                 <p className="text-sm font-medium">{user?.name || 'Admin User'}</p>
                 <p className="truncate text-xs text-muted-foreground">
-                  {user?.email || 'admin@wangchuktour.com'}
+                  {user?.email || ''}
                 </p>
               </div>
               <DropdownMenuItem onClick={() => router.push('/admin/settings/users')}>

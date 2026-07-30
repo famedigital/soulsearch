@@ -179,7 +179,7 @@ export function BookingOpsPanel({
     try {
       const form = new FormData();
       form.append('file', file);
-      form.append('folder', 'wangchuk-tour/booking-docs');
+      form.append('folder', 'soulsearch/booking-docs');
       form.append('resourceType', 'auto');
 
       const uploadRes = await fetch('/api/upload', { method: 'POST', body: form });

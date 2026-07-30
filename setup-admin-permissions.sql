@@ -30,12 +30,12 @@ SET permissions = '[
 WHERE role = 'admin' AND permissions IS NULL;
 
 -- Create default admin user if none exists
--- This creates an admin user with email: admin@wangchuk-tour.com and password: admin123
+-- This creates an admin user with email: admin@example.com and password: admin123
 -- NOTE: Change this password after first login!
 INSERT INTO admin_users (id, email, name, password_hash, role, permissions, is_active, email_verified, created_at)
 VALUES (
   '00000000-0000-0000-0000-000000000001',
-  'admin@wangchuk-tour.com',
+  'admin@example.com',
   'System Administrator',
   '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5Mx5pXhY8NWqG', -- password: admin123
   'admin',
@@ -73,7 +73,7 @@ ON CONFLICT (email) DO NOTHING;
 INSERT INTO admin_users (id, email, name, password_hash, role, permissions, is_active, email_verified, created_at)
 VALUES (
   '00000000-0000-0000-0000-000000000002',
-  'editor@wangchuk-tour.com',
+  'admin@example.com',
   'Content Editor',
   '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5Mx5pXhY8NWqG', -- password: editor123
   'editor',
@@ -101,7 +101,7 @@ ON CONFLICT (email) DO NOTHING;
 INSERT INTO admin_users (id, email, name, password_hash, role, permissions, is_active, email_verified, created_at)
 VALUES (
   '00000000-0000-0000-0000-000000000003',
-  'viewer@wangchuk-tour.com',
+  'admin@example.com',
   'Content Viewer',
   '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5Mx5pXhY8NWqG', -- password: viewer123
   'viewer',
@@ -134,7 +134,7 @@ ORDER BY role, created_at;
 -- Output instructions
 SELECT 'Admin users setup complete!' AS status;
 SELECT 'Login credentials:' AS info;
-SELECT 'Admin: admin@wangchuk-tour.com / admin123' AS admin_login;
-SELECT 'Editor: editor@wangchuk-tour.com / editor123' AS editor_login;
-SELECT 'Viewer: viewer@wangchuk-tour.com / viewer123' AS viewer_login;
+SELECT 'Admin: admin@example.com / admin123' AS admin_login;
+SELECT 'Editor: admin@example.com / editor123' AS editor_login;
+SELECT 'Viewer: admin@example.com / viewer123' AS viewer_login;
 SELECT 'IMPORTANT: Change passwords after first login!' AS security_warning;

@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCompanyBrand } from '@/hooks/use-company-brand';
+import { BrandMark } from '@/components/public/BrandMark';
 
 function ResetPasswordForm() {
   const brand = useCompanyBrand();
@@ -103,11 +104,15 @@ function ResetPasswordForm() {
     <div className="flex min-h-screen items-center justify-center bg-muted p-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <img
-            src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
-            alt={brand.name}
-            className="mx-auto mb-4 h-16 w-auto object-contain"
-          />
+          <div className="mb-4 inline-flex justify-center">
+            <BrandMark
+              name={brand.name}
+              logo={brand.logo}
+              size="lg"
+              showName={!brand.logo}
+              className="justify-center"
+            />
+          </div>
           <h1 className="font-heading text-2xl font-semibold text-foreground">Set new password</h1>
           {email ? (
             <p className="mt-1 text-sm text-muted-foreground">Account: {email}</p>
@@ -147,6 +152,7 @@ function ResetPasswordForm() {
                         <Lock className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                           id="password"
+                          key={showPassword ? 'text' : 'password'}
                           type={showPassword ? 'text' : 'password'}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -157,8 +163,10 @@ function ResetPasswordForm() {
                         />
                         <button
                           type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute top-1/2 right-2.5 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                          onClick={() => setShowPassword((v) => !v)}
+                          aria-label={showPassword ? 'Hide password' : 'Show password'}
+                          title={showPassword ? 'Hide password' : 'Show password'}
+                          className="absolute top-1/2 right-2.5 z-10 -translate-y-1/2 rounded-sm p-1 text-muted-foreground hover:text-foreground"
                         >
                           {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>

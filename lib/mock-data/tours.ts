@@ -1,4 +1,4 @@
-// Mock tour data for Wangchuk Tour
+// Mock tour data for Soul Search Tours
 
 export interface Tour {
   id: string;

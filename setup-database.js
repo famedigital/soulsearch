@@ -23,7 +23,7 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function setupDatabase() {
-  console.log('🔧 Setting up Wangchuks Bhutan Tours Database...\n');
+  console.log('🔧 Setting up Soul Search Tours Database...\n');
 
   try {
     // Test connection
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- Create admin user
 INSERT INTO admin_users (email, password_hash, name, role, is_active, email_verified)
 VALUES (
-  'admin@wangchuktour.com',
+  'admin@example.com',
   '$2b$12$HgtvGJqEgu3DKhvRbmPFP.rkixdtzcEr31F5HvgcoxjuDVSEp4rZu',
   'Admin User',
   'super_admin',
@@ -97,7 +97,7 @@ VALUES (
       const { data: newUser, error: createError } = await supabase
         .from('admin_users')
         .insert({
-          email: 'admin@wangchuktour.com',
+          email: 'admin@example.com',
           password_hash: '$2b$12$HgtvGJqEgu3DKhvRbmPFP.rkixdtzcEr31F5HvgcoxjuDVSEp4rZu',
           name: 'Admin User',
           role: 'super_admin',
@@ -113,7 +113,7 @@ VALUES (
       } else {
         console.log('   ✅ Admin user created successfully!');
         console.log('\n   📋 Login Credentials:');
-        console.log('   📧 Email: admin@wangchuktour.com');
+        console.log('   📧 Email: admin@example.com');
         console.log('   🔑 Password: Admin@123');
         console.log('   🌐 Login at: http://localhost:3000/admin/login\n');
       }

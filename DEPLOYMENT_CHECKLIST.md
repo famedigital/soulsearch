@@ -1,4 +1,4 @@
-# 🚀 Wangchuks Bhutan Tours - Deployment Checklist
+# 🚀 Soul Search Tours - Deployment Checklist
 
 **Status:** 🟢 Ready for Deployment
 **Development Server:** ✅ Running on http://localhost:3000
@@ -31,7 +31,7 @@
 
 **Step 1: Access Login Page**
 - URL: http://localhost:3000/admin/login
-- Email: admin@wangchuktour.com
+- Email: admin@example.com
 - Password: Admin@123
 
 **Step 2: Login & Verify**
@@ -267,7 +267,7 @@ npm run dev
 
 **Admin Credentials:**
 ```
-Email: admin@wangchuktour.com
+Email: admin@example.com
 Password: Admin@123
 ⚠️ CHANGE IMMEDIATELY AFTER FIRST LOGIN!
 ```
@@ -288,6 +288,6 @@ Password: Admin@123
 
 ---
 
-**🏆 Excellent! Your Wangchuks Bhutan Tours & Treks backend is production-ready!** 🏆
+**🏆 Excellent! Your Soul Search Tours backend is production-ready!** 🏆
 
 *This checklist will guide you through deployment. Check off each item as you complete it.*

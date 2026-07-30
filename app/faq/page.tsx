@@ -138,7 +138,7 @@ export default function FAQPage() {
         <section className="relative overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src={optimizeImageUrl('https://res.cloudinary.com/hckgrdeh/image/upload/v1782911267/tigernest_paro_wdenqu.jpg', 1920, 1080)}
+              src={optimizeImageUrl('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', 1920, 1080)}
               alt="Frequently Asked Questions"
               fill
               className="object-cover"
@@ -300,7 +300,7 @@ export default function FAQPage() {
         <section className="py-20 md:py-28 relative overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src={optimizeImageUrl('https://res.cloudinary.com/hckgrdeh/image/upload/v1782965945/punakhadzong_xkcrcu.jpg', 1920, 1080)}
+              src={optimizeImageUrl('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80', 1920, 1080)}
               alt="Contact Us"
               fill
               className="object-cover"

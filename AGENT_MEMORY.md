@@ -1,11 +1,11 @@
-# Wangchuk Tour - Agent Memory
+# Soul Search Tours - Agent Memory
 
 ## Project Context
-- **Client**: Wangchuk Tour (Bhutanese tourism company)
-- **Project Location**: `D:\VS STUDIO PROJECT\wangchuk-tour`
-- **Repository**: https://github.com/famedigital/wangchukstour.git
+- **Client**: Soul Search Tours (Bhutanese tourism company)
+- **Project Location**: `D:\VS STUDIO PROJECT\soulsearch`
+- **Repository**: https://github.com/famedigital/soulsearch.git
 - **Tech Stack**: Next.js 16.2.9 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, shadcn/ui
-- **Deployment**: Vercel (https://wangchukstour.vercel.app)
+- **Deployment**: Vercel (https://soulsearch-beta.vercel.app)
 - **Backend**: Supabase (installed but not configured - using mock data)
 
 ## Design System (Premium Red Theme)
@@ -141,7 +141,7 @@ lib/mock-data/
 - Removed `border-t` from CardFooter
 
 ## Vercel Deployment
-- **URL**: https://wangchukstour.vercel.app
+- **URL**: https://soulsearch-beta.vercel.app
 - **Status**: Active and building successfully
 - **Recent Fixes**:
   - Fixed MagneticButton TypeScript errors
@@ -154,7 +154,7 @@ lib/mock-data/
 - **Admin Panel**: Mock dashboard at `/admin/dashboard` (no authentication)
 
 ## GitHub Repository
-- **Remote**: https://github.com/famedigital/wangchukstour.git
+- **Remote**: https://github.com/famedigital/soulsearch.git
 - **Branch**: master
 - **Recent Commits**:
   - Added mock admin dashboard

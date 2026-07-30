@@ -30,15 +30,15 @@ export type ContactContent = {
 }
 
 export const CONTACT_INFO_DEFAULTS: ContactInfo = {
-  email: 'info@wangchuktour.com',
-  phone: '+975 17643416',
+  email: '',
+  phone: '',
   address: 'Thimphu, Bhutan',
-  whatsapp: '+97517643416',
+  whatsapp: '',
 }
 
 export const CONTACT_AUTO_REPLY_DEFAULTS: ContactAutoReply = {
   enabled: true,
-  subject: 'Thank you for contacting Wangchuks Bhutan Tours!',
+  subject: 'Thank you for contacting Soul Search Tours!',
   message:
     'We have received your inquiry and will respond within 24 hours. In the meantime, explore our tour packages for inspiration!',
 }
@@ -47,8 +47,7 @@ export const CONTACT_DEFAULTS: ContactContent = {
   hero: {
     title: 'Contact Us',
     subtitle: "We're here to help you plan your perfect Bhutanese adventure",
-    backgroundImage:
-      'https://res.cloudinary.com/hckgrdeh/image/upload/v1782965945/punakhadzong_xkcrcu.jpg',
+    backgroundImage: '',
   },
   contactInfo: { ...CONTACT_INFO_DEFAULTS },
   officeHours: {

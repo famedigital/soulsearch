@@ -13,7 +13,7 @@ async function fixDrukPathHeroImage() {
 
   // Use a proper mountain/trekking image for both hero and thumbnail
   // Bumthang is perfect - beautiful mountain landscape
-  const heroImageUrl = 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911270/bumthang_bdxytr.jpg';
+  const heroImageUrl = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
   const heroImagePublicId = 'bumthang_bdxytr';
 
   try {

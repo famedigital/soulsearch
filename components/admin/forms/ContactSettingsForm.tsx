@@ -64,10 +64,10 @@ const defaultContent: ContactContent = {
   hero: {
     title: 'Get in Touch',
     subtitle: "We're here to help you plan your perfect Bhutanese adventure",
-    backgroundImage: 'https://res.cloudinary.com/hckgrdeh/image/upload/v1782965945/punakhadzong_xkcrcu.jpg'
+    backgroundImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80'
   },
   contactInfo: {
-    email: 'info@wangchuktour.com',
+    email: '',
     phone: '+975 2 327654',
     address: 'Thimphu, Bhutan',
     whatsapp: '+975 17 00 00 00'
@@ -78,9 +78,9 @@ const defaultContent: ContactContent = {
     sundays: 'Closed'
   },
   socialMedia: {
-    facebook: 'https://facebook.com/wangchuktours',
-    instagram: 'https://instagram.com/wangchuktours',
-    twitter: 'https://twitter.com/wangchuktours',
+    facebook: '',
+    instagram: '',
+    twitter: '',
   },
   formFields: {
     showName: true,
@@ -93,7 +93,7 @@ const defaultContent: ContactContent = {
   },
   autoReply: {
     enabled: true,
-    subject: 'Thank you for contacting Wangchuks Bhutan Tours!',
+    subject: 'Thank you for contacting Soul Search Tours!',
     message: 'We have received your inquiry and will respond within 24 hours. In the meantime, explore our tour packages for inspiration!'
   }
 };
@@ -157,7 +157,7 @@ export function ContactSettingsForm() {
           pageType: 'contact',
           content,
           metadata: {
-            seoTitle: 'Contact Us - Wangchuks Bhutan Tours & Treks',
+            seoTitle: 'Contact Us - Soul Search Tours',
             seoDescription: 'Get in touch with our team for personalized Bhutan travel planning and inquiries.'
           }
         })
@@ -289,7 +289,7 @@ export function ContactSettingsForm() {
                       ...content.contactInfo,
                       email: e.target.value
                     })}
-                    placeholder="e.g., info@wangchuktour.com"
+                    placeholder=""
                   />
                 </div>
               </div>

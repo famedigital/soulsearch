@@ -109,10 +109,22 @@ export function SharedItineraryView({
       <header className="border-b border-stone-200 bg-white">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-5">
           <img
-            src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
+            src={brand.logo || undefined}
             alt={brand.name}
             className="h-10 w-auto"
+            style={{ display: brand.logo ? undefined : 'none' }}
           />
+          {!brand.logo && (
+            <div className="flex size-10 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+              {brand.name
+                .split(/\s+/)
+                .filter(Boolean)
+                .slice(0, 2)
+                .map((w) => w[0])
+                .join('')
+                .toUpperCase() || 'SS'}
+            </div>
+          )}
           <div>
             <p className="font-heading text-sm font-semibold">{brand.name}</p>
             <p className="text-xs text-stone-500">

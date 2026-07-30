@@ -310,7 +310,7 @@ export function BlogEditor({ post, postId, isNewPost, onSave, onCancel }: BlogEd
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-primary text-xs hover:underline truncate">
-            wangchuktour.com/blog/{formData.slug || 'your-post-slug'}
+            soulsearch-beta.vercel.app/blog/{formData.slug || 'your-post-slug'}
           </p>
           <p className="font-medium text-foreground truncate">
             {formData.meta_title || formData.title || 'Your Post Title'}

@@ -31,7 +31,7 @@ export async function uploadImage(
 ): Promise<UploadResult> {
   try {
     const result = await cloudinary.uploader.upload(file as string, {
-      folder: options.folder || 'wangchuk-tour',
+      folder: options.folder || 'soulsearch',
       public_id: options.publicId,
       overwrite: options.overwrite ?? true,
       resource_type: options.resourceType || 'image',

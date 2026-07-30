@@ -23,6 +23,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Home,
+  LayoutTemplate,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -62,6 +63,17 @@ const cmsGuides = [
       'Edit Featured journeys headings and The Soul Search Difference section.',
       'Change titles, descriptions, and icons — then Save changes.',
       'Open the public homepage to confirm the updated text.',
+    ],
+  },
+  {
+    title: 'Website layout',
+    href: '/admin/settings/template',
+    icon: LayoutTemplate,
+    steps: [
+      'Pick between Aurora (split hero), Editorial (magazine rows), and Immersive (full-bleed, dark).',
+      'The choice changes the homepage structure plus the navigation and footer on every page.',
+      'Colours and written content are unaffected — those stay in Color theme and Homepage.',
+      'Save template, then open the public site to confirm the new layout.',
     ],
   },
   {
@@ -112,7 +124,7 @@ const cmsGuides = [
       'Itinerary tab: customize days for this client (shared links use the custom version).',
       'Documents tab: upload room vouchers, SDF papers, invoices, payment proofs (PDF/DOC/image).',
       'Share tab: Client naked itinerary link, or Guide & driver link (no rates, includes ops).',
-      'Download Invoice opens a printable Wangchuks invoice (Print / Save PDF).',
+      'Download Invoice opens a printable Soul Search Tours invoice (Print / Save PDF).',
       'Confirming or cancelling a booking clears it from the pending notification badge.',
     ],
   },
@@ -228,14 +240,14 @@ export function AdminDocumentation() {
         <div className="flex flex-wrap items-center gap-2">
           <Badge>CMS guide</Badge>
           <Badge variant="outline">Client ownership</Badge>
-          <Badge variant="secondary">Wangchuks Bhutan Tours &amp; Treks</Badge>
+          <Badge variant="secondary">Soul Search Tours</Badge>
         </div>
         <h1 className="font-heading text-3xl font-semibold tracking-tight">
           Documentation &amp; operations manual
         </h1>
         <p className="max-w-3xl text-muted-foreground">
           How to run the admin CMS day to day, what technology powers the site, why the brand colors
-          were chosen, and how ownership is structured so Wangchuks Bhutan Tours &amp; Treks can keep
+          were chosen, and how ownership is structured so Soul Search Tours can keep
           everything if the working relationship with Innovates ends.
         </p>
       </div>
@@ -361,7 +373,7 @@ export function AdminDocumentation() {
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
                 Supabase is connected through the <strong className="text-foreground">client&apos;s Google account</strong>.
-                Credentials and project ownership stay with Wangchuks Bhutan Tours &amp; Treks — not locked to
+                Credentials and project ownership stay with Soul Search Tours — not locked to
                 Innovates.
               </CardContent>
             </Card>
@@ -485,7 +497,7 @@ export function AdminDocumentation() {
               </p>
               <p>
                 We avoided trendy purple gradients and generic “AI cream + terracotta” looks so the
-                brand stays distinctly Wangchuks / Bhutan.
+                brand stays distinctly Soul Search Tours, rooted in Bhutan.
               </p>
             </CardContent>
           </Card>
@@ -599,12 +611,12 @@ export function AdminDocumentation() {
             <CardContent className="space-y-3 p-6 text-sm leading-relaxed">
               <p className="text-base font-medium text-foreground">
                 All website content, media, accounts, and technology for this project belong to
-                Wangchuks Bhutan Tours &amp; Treks (the client).
+                Soul Search Tours (the client).
               </p>
               <p className="text-muted-foreground">
                 Supabase, Cloudinary, Vercel, GitHub, domain registration at{' '}
                 <strong className="text-foreground">www.bt.bt</strong>, and related Google-linked
-                access were set up for the client. If Wangchuks Bhutan Tours &amp; Treks later chooses not
+                access were set up for the client. If Soul Search Tours later chooses not
                 to continue with Innovates, they can keep the site, data, images, domain, and
                 hosting — and hand the tech stack to any future developer or agency without
                 losing ownership.
@@ -653,7 +665,7 @@ export function AdminDocumentation() {
             </CardHeader>
             <CardContent className="grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
               <p>
-                Public site contact: <span className="text-foreground">info@wangchuktour.com</span>
+                Public site contact: <span className="text-foreground">configure in Contact settings</span>
               </p>
               <p>
                 WhatsApp (site): <span className="text-foreground">+975 17 643 416</span>
@@ -670,7 +682,7 @@ export function AdminDocumentation() {
       </Tabs>
 
       <p className="text-center text-xs text-muted-foreground">
-        Last updated for the admin documentation module · Wangchuks Bhutan Tours &amp; Treks CMS
+        Last updated for the admin documentation module · Soul Search Tours CMS
       </p>
     </div>
   );

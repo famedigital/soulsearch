@@ -1,8 +1,8 @@
 /* Admin-scoped service worker for /admin/login PWA */
-const CACHE_NAME = 'wangchuk-admin-v1';
+const CACHE_NAME = 'soulsearch-admin-v1';
 const PRECACHE_URLS = [
   '/admin/login',
-  '/admin-pwa/manifest.webmanifest',
+  '/api/admin/manifest',
   '/admin-pwa/icons/icon-192.png',
   '/admin-pwa/icons/icon-512.png',
   '/admin-pwa/icons/icon-512-maskable.png',
@@ -37,34 +37,42 @@ self.addEventListener('fetch', (event) => {
 
   // Only handle same-origin admin + PWA asset requests
   if (url.origin !== self.location.origin) return;
-  if (!url.pathname.startsWith('/admin') && !url.pathname.startsWith('/admin-pwa')) {
+  if (
+    !url.pathname.startsWith('/admin') &&
+    !url.pathname.startsWith('/admin-pwa') &&
+    !url.pathname.startsWith('/api/admin/manifest') &&
+    !url.pathname.startsWith('/api/brand/icon')
+  ) {
     return;
   }
 
-  // Always network for API calls
-  if (url.pathname.startsWith('/api/')) {
-    event.respondWith(fetch(request));
-    return;
-  }
-
-  // Network-first for admin pages; fall back to cache (login shell offline)
-  event.respondWith(
-    fetch(request)
-      .then((response) => {
-        if (response && response.ok) {
+  // Network-first for HTML / manifest so brand/logo updates apply quickly
+  if (
+    request.mode === 'navigate' ||
+    url.pathname.endsWith('.webmanifest') ||
+    url.pathname === '/api/admin/manifest' ||
+    url.pathname.startsWith('/api/brand/icon')
+  ) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
-        }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+      return fetch(request).then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         return response;
-      })
-      .catch(async () => {
-        const cached = await caches.match(request);
-        if (cached) return cached;
-        if (request.mode === 'navigate') {
-          const login = await caches.match('/admin/login');
-          if (login) return login;
-        }
-        return Response.error();
-      })
+      });
+    })
   );
 });

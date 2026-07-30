@@ -1,4 +1,4 @@
-// Mock blog data for Wangchuk Tour
+// Mock blog data for Soul Search Tours
 
 export interface Blog {
   id: string;
@@ -71,19 +71,19 @@ The best views are from the opposite cliff face. Morning light offers dramatic i
 - Dress modestly
 
 Whether you're seeking spiritual connection or simply one of the world's most stunning vistas, Tiger's Nest is an experience that will stay with you long after you've left Bhutan.`,
-    featured_image: 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911267/tigernest_paro_wdenqu.jpg',
+    featured_image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
     gallery_images: [
-      'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911267/tigernest_paro_wdenqu.jpg',
-      'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911338/paro-rimpungdzong_uemj9o.jpg',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
     ],
     category: 'Travel Guide',
     tags: ['tigers-nest', 'monastery', 'paro', 'spiritual', 'hiking', 'bhutan-culture'],
-    author_name: 'Wangchuk Dorji',
-    author_bio: 'Founder of Wangchuk Tour with 15+ years of experience guiding travelers through Bhutan.',
+    author_name: 'Tenzin Dorji',
+    author_bio: 'Founder of Soul Search Tours with 15+ years of experience guiding travelers through Bhutan.',
     status: 'published',
     // is_featured: true, // Removed - field doesn't exist in database schema
     published_at: '2024-03-15',
-    meta_title: 'The Ultimate Guide to Tiger\'s Nest Monastery - Wangchuk Tour',
+    meta_title: 'The Ultimate Guide to Tiger\'s Nest Monastery - Soul Search Tours',
     meta_description: 'Complete guide to visiting Bhutan\'s sacred Tiger\'s Nest Monastery. Learn about the hike, history, and spiritual significance.',
   },
   {
@@ -137,14 +137,14 @@ Layers are essential. Days can be warm, but nights remain cool, especially at hi
 - Sun protection
 
 Spring in Bhutan isn't just a season - it's a celebration of life, culture, and natural beauty that will leave you transformed.`,
-    featured_image: 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911323/phobjikha1_ddflbj.jpg',
+    featured_image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
     gallery_images: [
-      'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912162/thimphu-moonsoon_dftrcz.jpg',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
     ],
     category: 'Seasonal',
     tags: ['spring', 'festivals', 'rhododendrons', 'best-time-to-visit'],
-    author_name: 'Karma Wangchuk',
-    author_bio: 'Senior guide at Wangchuk Tour with expertise in Bhutanese history and Buddhism.',
+    author_name: 'Karma Dorji',
+    author_bio: 'Senior guide at Soul Search Tours with expertise in Bhutanese history and Buddhism.',
     status: 'published',
     // is_featured: true, // Removed - field doesn't exist in database schema
     published_at: '2024-02-20',
@@ -227,14 +227,14 @@ As a visitor to Bhutan, you'll encounter GNH through:
 - The balance of tradition and modernity
 
 Gross National Happiness isn't just a policy - it's a lived philosophy that permeates every aspect of life in Bhutan, offering valuable lessons for our world.`,
-    featured_image: 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911256/buddhapoint_z2kucc.jpg',
+    featured_image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
     gallery_images: [
-      'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912162/thimphu-moonsoon_dftrcz.jpg',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
     ],
     category: 'Culture',
     tags: ['gnh', 'bhutan-philosophy', 'culture', 'sustainability'],
-    author_name: 'Wangchuk Dorji',
-    author_bio: 'Founder of Wangchuk Tour with 15+ years of experience guiding travelers through Bhutan.',
+    author_name: 'Tenzin Dorji',
+    author_bio: 'Founder of Soul Search Tours with 15+ years of experience guiding travelers through Bhutan.',
     status: 'published',
     // is_featured: false, // Removed - field doesn't exist in database schema
     published_at: '2024-01-10',
@@ -340,12 +340,12 @@ Most dishes can be adjusted:
 - "Local style" for authentic spice level
 
 Bhutanese cuisine is more than just food - it's a window into the culture, reflecting the country's mountainous terrain, Buddhist values, and communal spirit. Approach with an open mind and adventurous palate!`,
-    featured_image: 'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912157/dochula-tshechu_d3d6dg.jpg',
+    featured_image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
     gallery_images: [],
     category: 'Food & Culture',
     tags: ['food', 'cuisine', 'ema-datshi', 'bhutanese-culture'],
     author_name: 'Tashi Deki',
-    author_bio: 'Operations Manager at Wangchuk Tour. Born and raised in Thimphu with deep knowledge of Bhutanese culture.',
+    author_bio: 'Operations Manager at Soul Search Tours. Born and raised in Thimphu with deep knowledge of Bhutanese culture.',
     status: 'published',
     // is_featured: false, // Removed - field doesn't exist in database schema
     published_at: '2023-12-05',

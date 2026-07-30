@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-    const folder = (formData.get('folder') as string) || 'wangchuk-tour';
+    const folder = (formData.get('folder') as string) || 'soulsearch';
     const publicId = (formData.get('publicId') as string) || undefined;
     const resourceTypeParam = (formData.get('resourceType') as string) || 'auto';
     const resourceType =

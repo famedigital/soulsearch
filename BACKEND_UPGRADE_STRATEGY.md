@@ -1,4 +1,4 @@
-# Backend Upgrade Strategy - Wangchuks Bhutan Tours & Treks
+# Backend Upgrade Strategy - Soul Search Tours
 
 ## 🎯 **EXECUTIVE SUMMARY**
 

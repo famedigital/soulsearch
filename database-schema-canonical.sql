@@ -1,5 +1,5 @@
 -- ============================================================================
--- CANONICAL DATABASE SCHEMA FOR WANGCHUK TOUR CMS
+-- CANONICAL DATABASE SCHEMA FOR SOUL SEARCH TOURS CMS
 -- ============================================================================
 -- This is the single source of truth for the database schema.
 -- All other schema files should be deleted and this one should be used instead.
@@ -122,15 +122,15 @@ INSERT INTO blog_posts (
   status,
   published_at
 ) VALUES (
-  'Welcome to Wangchuks Bhutan Tours',
-  'welcome-to-wangchuk-tours',
-  '<h2>Welcome to Wangchuks Bhutan Tours</h2><p>This is your first blog post. You can edit or delete it, or start a new post.</p>',
+  'Welcome to Soul Search Tours',
+  'welcome-to-soulsearchs',
+  '<h2>Welcome to Soul Search Tours</h2><p>This is your first blog post. You can edit or delete it, or start a new post.</p>',
   'Welcome to our new blog - explore the beautiful Kingdom of Bhutan with us.',
-  'Wangchuks Bhutan Tours Team',
+  'Soul Search Tours Team',
   'Your trusted travel partner for Bhutan adventures',
   'Announcements',
   ARRAY['travel', 'bhutan', 'welcome'],
-  'Welcome to Wangchuks Bhutan Tours - your premier travel partner for exploring the Kingdom of Bhutan.',
+  'Welcome to Soul Search Tours - your premier travel partner for exploring the Kingdom of Bhutan.',
   'published',
   NOW()
 );

@@ -94,7 +94,7 @@ async function setupAdminUsers() {
       .from('admin_users')
       .upsert({
         id: '00000000-0000-0000-0000-000000000001',
-        email: 'admin@wangchuk-tour.com',
+        email: 'admin@example.com',
         name: 'System Administrator',
         password_hash: adminPassword,
         role: 'admin',
@@ -111,7 +111,7 @@ async function setupAdminUsers() {
     if (adminError && !adminError.message.includes('duplicate')) {
       console.error('Error creating admin user:', adminError);
     } else {
-      console.log('✓ Admin user created/updated: admin@wangchuk-tour.com');
+      console.log('✓ Admin user created/updated: admin@example.com');
     }
 
     // Create editor user
@@ -120,7 +120,7 @@ async function setupAdminUsers() {
       .from('admin_users')
       .upsert({
         id: '00000000-0000-0000-0000-000000000002',
-        email: 'editor@wangchuk-tour.com',
+        email: 'admin@example.com',
         name: 'Content Editor',
         password_hash: editorPassword,
         role: 'editor',
@@ -135,7 +135,7 @@ async function setupAdminUsers() {
     if (editorError && !editorError.message.includes('duplicate')) {
       console.error('Error creating editor user:', editorError);
     } else {
-      console.log('✓ Editor user created/updated: editor@wangchuk-tour.com');
+      console.log('✓ Editor user created/updated: admin@example.com');
     }
 
     // Create viewer user
@@ -144,7 +144,7 @@ async function setupAdminUsers() {
       .from('admin_users')
       .upsert({
         id: '00000000-0000-0000-0000-000000000003',
-        email: 'viewer@wangchuk-tour.com',
+        email: 'admin@example.com',
         name: 'Content Viewer',
         password_hash: viewerPassword,
         role: 'viewer',
@@ -159,7 +159,7 @@ async function setupAdminUsers() {
     if (viewerError && !viewerError.message.includes('duplicate')) {
       console.error('Error creating viewer user:', viewerError);
     } else {
-      console.log('✓ Viewer user created/updated: viewer@wangchuk-tour.com');
+      console.log('✓ Viewer user created/updated: admin@example.com');
     }
 
     // Verify setup
@@ -185,9 +185,9 @@ async function setupAdminUsers() {
     console.log('🎉 Admin users setup complete!');
     console.log('\n🔐 Login Credentials:');
     console.log('─'.repeat(80));
-    console.log('Admin:    admin@wangchuk-tour.com / admin123');
-    console.log('Editor:   editor@wangchuk-tour.com / editor123');
-    console.log('Viewer:   viewer@wangchuk-tour.com / viewer123');
+    console.log('Admin:    admin@example.com / admin123');
+    console.log('Editor:   admin@example.com / editor123');
+    console.log('Viewer:   admin@example.com / viewer123');
     console.log('\n⚠️  IMPORTANT: Change passwords after first login!');
     console.log('─'.repeat(80));
 

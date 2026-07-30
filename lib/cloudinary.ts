@@ -53,7 +53,7 @@ export async function uploadImage(
 ): Promise<CloudinaryUploadResult> {
   try {
     const uploadOptions = {
-      folder: options?.folder || 'wangchuk-tour',
+      folder: options?.folder || 'soulsearch',
       tags: options?.tags || [],
       overwrite: options?.overwrite ?? true,
       transformation: options?.transformation,

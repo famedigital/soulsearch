@@ -148,7 +148,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                   <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-muted md:h-28 md:w-28">
                     <img
                       src={optimizeImageUrl(
-                        'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782912162/thimphu-moonsoon_dftrcz.jpg',
+                        'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
                         200,
                         200
                       )}
@@ -204,7 +204,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           <div className="absolute inset-0">
             <img
               src={optimizeImageUrl(
-                'https://res.cloudinary.com/hckgrdeh/image/upload/q_auto,f_auto/v1782911256/buddhapoint_z2kucc.jpg',
+                'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80',
                 1920,
                 1080
               )}

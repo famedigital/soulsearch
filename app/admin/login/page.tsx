@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Mail, Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -10,9 +10,18 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { AdminPwaRegister } from '@/components/admin/AdminPwaRegister';
 import { useCompanyBrand } from '@/hooks/use-company-brand';
+import { BrandMark } from '@/components/public/BrandMark';
 
-export default function AdminLoginPage() {
+function safeAdminRedirect(raw: string | null): string | null {
+  if (!raw) return null;
+  if (!raw.startsWith('/admin')) return null;
+  if (raw.startsWith('//')) return null;
+  return raw;
+}
+
+function AdminLoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const brand = useCompanyBrand();
   const [formData, setFormData] = useState({
     email: '',
@@ -39,7 +48,22 @@ export default function AdminLoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push('/admin/dashboard');
+        const redirect = safeAdminRedirect(searchParams.get('redirect'));
+        let destination = redirect || '/admin/dashboard';
+
+        try {
+          const setupRes = await fetch('/api/admin/setup', { credentials: 'same-origin' });
+          if (setupRes.ok) {
+            const setup = await setupRes.json();
+            if (!setup.completed) {
+              destination = '/admin/setup';
+            }
+          }
+        } catch {
+          /* fall through to dashboard/redirect */
+        }
+
+        router.push(destination);
         router.refresh();
       } else {
         setError(data.error || 'Login failed. Please try again.');
@@ -57,10 +81,12 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <div className="mb-4 inline-flex items-center justify-center">
-            <img
-              src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
-              alt={brand.name}
-              className="h-20 w-auto object-contain"
+            <BrandMark
+              name={brand.name}
+              logo={brand.logo}
+              size="xl"
+              showName={!brand.logo}
+              className="justify-center"
             />
           </div>
           <h1 className="font-heading mb-2 text-3xl font-semibold text-foreground">Admin Login</h1>
@@ -80,13 +106,14 @@ export default function AdminLoginPage() {
               <div className="grid gap-2">
                 <Label htmlFor="email">Email Address</Label>
                 <div className="relative">
-                  <Mail className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Mail className="pointer-events-none absolute top-1/2 left-2.5 z-10 size-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="admin@wangchuktour.com"
+                    placeholder=""
+                    autoComplete="username"
                     className="pl-8"
                     required
                   />
@@ -96,20 +123,24 @@ export default function AdminLoginPage() {
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
-                  <Lock className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Lock className="pointer-events-none absolute top-1/2 left-2.5 z-10 size-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     id="password"
+                    key={showPassword ? 'text' : 'password'}
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="Enter your password"
+                    autoComplete="current-password"
                     className="pr-10 pl-8"
                     required
                   />
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute top-1/2 right-2.5 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    title={showPassword ? 'Hide password' : 'Show password'}
+                    className="absolute top-1/2 right-2.5 z-10 -translate-y-1/2 rounded-sm p-1 text-muted-foreground hover:text-foreground"
                   >
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
@@ -145,5 +176,19 @@ export default function AdminLoginPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-muted p-4">
+          <p className="text-sm text-muted-foreground">Loading…</p>
+        </div>
+      }
+    >
+      <AdminLoginForm />
+    </Suspense>
   );
 }

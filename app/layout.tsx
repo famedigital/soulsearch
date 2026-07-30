@@ -10,10 +10,12 @@ import {
   SITE_DESCRIPTION,
   getSiteUrl,
 } from "@/lib/seo";
-import { getCompanyName } from "@/lib/brand";
+import { getCompanyName, getSiteLogo } from "@/lib/brand";
 import { DEFAULT_COMPANY_NAME } from "@/lib/brand-defaults";
 import { getGlobalTheme } from "@/lib/theme";
 import { themeToCssVariables } from "@/lib/theme-config";
+import { getSiteTemplate } from "@/lib/template";
+import { TemplateProvider } from "@/components/providers/TemplateProvider";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
@@ -41,9 +43,29 @@ const playfair = Playfair_Display({
 const siteUrl = getSiteUrl();
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteName = await getCompanyName();
+  const [siteName, logo] = await Promise.all([getCompanyName(), getSiteLogo()]);
   const description =
     SITE_DESCRIPTION.replace(DEFAULT_COMPANY_NAME, siteName) || SITE_DESCRIPTION;
+
+  const icons: Metadata['icons'] = logo
+    ? {
+        icon: [
+          { url: '/api/brand/icon/32', sizes: '32x32', type: 'image/png' },
+          { url: '/api/brand/icon/192', sizes: '192x192', type: 'image/png' },
+          { url: '/api/brand/icon/512', sizes: '512x512', type: 'image/png' },
+          { url: logo },
+        ],
+        apple: [{ url: '/api/brand/icon/180', sizes: '180x180', type: 'image/png' }],
+      }
+    : {
+        icon: [
+          { url: '/brand/soulsearch-emblem.svg', type: 'image/svg+xml' },
+          { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+          { url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { url: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+        ],
+        apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+      };
 
   return {
     metadataBase: new URL(siteUrl),
@@ -61,15 +83,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName,
       "Bhutan adventures",
     ],
-    icons: {
-      icon: [
-        { url: "/brand/wangchuk-emblem.svg", type: "image/svg+xml" },
-        { url: "/favicon.png", sizes: "32x32", type: "image/png" },
-        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-        { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
-      ],
-      apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    },
+    icons,
     openGraph: {
       type: "website",
       locale: "en_US",
@@ -109,12 +123,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = await getGlobalTheme();
+  const [theme, template] = await Promise.all([getGlobalTheme(), getSiteTemplate()]);
   const themeStyle = themeToCssVariables(theme) as CSSProperties;
 
   return (
     <html
       lang="en"
+      data-template={template}
       style={themeStyle}
       className={cn(
         "h-full antialiased font-sans",
@@ -125,9 +140,11 @@ export default async function RootLayout({
       )}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <TooltipProvider>
-          {children}
-        </TooltipProvider>
+        <TemplateProvider template={template}>
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
+        </TemplateProvider>
         <Toaster richColors position="top-right" />
       </body>
     </html>

@@ -94,10 +94,7 @@ function getDefaultContent(pageType: string) {
     home: mergeHomeContent(null),
     contact: {
       ...CONTACT_DEFAULTS,
-      socialMedia: {
-        facebook: 'https://facebook.com/wangchuktours',
-        instagram: 'https://instagram.com/wangchuktours',
-      },
+      socialMedia: {},
       formFields: {
         showName: true,
         showEmail: true,
@@ -112,8 +109,7 @@ function getDefaultContent(pageType: string) {
       hero: {
         title: 'Frequently Asked Questions',
         subtitle: 'Find answers to common questions about traveling to Bhutan',
-        backgroundImage:
-          'https://res.cloudinary.com/hckgrdeh/image/upload/v1782911267/tigernest_paro_wdenqu.jpg',
+        backgroundImage: '',
       },
       categories: ['General', 'Safety', 'Preparation', 'Booking'],
     },

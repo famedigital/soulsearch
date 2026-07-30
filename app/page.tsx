@@ -1,24 +1,23 @@
-import Link from 'next/link';
 import { Navigation } from '@/components/public/Navigation';
 import { Footer } from '@/components/public/Footer';
-import { buttonVariants } from '@/components/ui/button';
-import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { getFeaturedTours, getActiveHeroSlides, getFeaturedTestimonials } from '@/lib/database';
-import { HeroSlideshow } from '@/components/public/HeroSlideshow';
 import { TestimonialsSection } from '@/components/public/TestimonialsSection';
 
 // Force dynamic rendering for this page since it uses cookies
 export const dynamic = 'force-dynamic';
 import { DifferentiatorsSection } from '@/components/public/DifferentiatorsSection';
-import { TourCard } from '@/components/public/TourCard';
 import { CTASection } from '@/components/public/CTASection';
-import { ArrowRight } from 'lucide-react';
+import { HeroAurora } from '@/components/public/home/HeroAurora';
+import { HeroEditorial } from '@/components/public/home/HeroEditorial';
+import { HeroImmersive } from '@/components/public/home/HeroImmersive';
+import { FeaturedTours } from '@/components/public/home/FeaturedTours';
 import type { Metadata } from 'next';
-import { cn } from '@/lib/utils';
 import { buildSocialMetadata, SITE_DESCRIPTION, SITE_NAME } from '@/lib/seo';
 import { getCompanyName } from '@/lib/brand';
 import { DEFAULT_COMPANY_NAME } from '@/lib/brand-defaults';
 import { getHomePageContent } from '@/lib/content/get-home';
+import { getSiteTemplate } from '@/lib/template';
+import { SITE_TEMPLATE_IDS, type SiteTemplateId } from '@/lib/template-config';
 
 export async function generateMetadata(): Promise<Metadata> {
   const company = await getCompanyName();
@@ -65,13 +64,31 @@ const fallbackTestimonials = [
   },
 ];
 
-export default async function HomePage() {
-  const [featuredTours, heroSlides, dbTestimonials, homeContent] = await Promise.all([
-    getFeaturedTours(),
-    getActiveHeroSlides(),
-    getFeaturedTestimonials(),
-    getHomePageContent(),
-  ]);
+const HERO_BY_TEMPLATE = {
+  aurora: HeroAurora,
+  editorial: HeroEditorial,
+  immersive: HeroImmersive,
+} as const;
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ template?: string }>;
+}) {
+  const [featuredTours, heroSlides, dbTestimonials, homeContent, savedTemplate, params] =
+    await Promise.all([
+      getFeaturedTours(),
+      getActiveHeroSlides(),
+      getFeaturedTestimonials(),
+      getHomePageContent(),
+      getSiteTemplate(),
+      searchParams,
+    ]);
+
+  // `?template=` previews a layout without publishing it; anything invalid
+  // falls back to the saved setting.
+  const isPreview = SITE_TEMPLATE_IDS.includes(params.template as SiteTemplateId);
+  const template = isPreview ? (params.template as SiteTemplateId) : savedTemplate;
 
   const testimonials =
     dbTestimonials.length > 0
@@ -84,70 +101,24 @@ export default async function HomePage() {
         }))
       : fallbackTestimonials;
 
+  const Hero = HERO_BY_TEMPLATE[template];
+
   return (
     <div className="flex min-h-screen flex-col bg-background safe-bottom-padding lg:pb-0">
-      <Navigation />
+      <Navigation variant={template} />
 
-      <HeroSlideshow slides={heroSlides} autoPlay={true} interval={6000} />
+      <Hero slides={heroSlides} autoPlay interval={6000} />
 
-      {/* Featured tours */}
-      <section className="relative bg-muted py-20 md:py-28">
-        <div className="container">
-          <ScrollReveal>
-            <div className="mb-14 max-w-2xl md:mb-16">
-              <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                {homeContent.featured.eyebrow}
-              </p>
-              <h2 className="font-accent text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
-                {homeContent.featured.title}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-                {homeContent.featured.subtitle}
-              </p>
-            </div>
-          </ScrollReveal>
+      <FeaturedTours tours={featuredTours} content={homeContent.featured} variant={template} />
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-6 md:gap-8 lg:grid-cols-3">
-            {featuredTours.length > 0 ? (
-              featuredTours.map((tour, index) => (
-                <TourCard key={tour.id} tour={tour} index={index} />
-              ))
-            ) : (
-              <div className="col-span-full py-16 text-center">
-                <p className="text-lg text-muted-foreground">No featured tours available at the moment.</p>
-                <Link href="/tours" className={cn(buttonVariants({ variant: 'outline' }), 'mt-6')}>
-                  View All Tours
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {featuredTours.length > 0 && (
-            <ScrollReveal direction="up" className="mt-14 text-center md:mt-16">
-              <Link
-                href="/tours"
-                className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'inline-flex gap-2')}
-              >
-                View All Tours
-                <ArrowRight className="size-4" />
-              </Link>
-            </ScrollReveal>
-          )}
-        </div>
-      </section>
-
-      {/* Why choose us */}
-      <section className="relative overflow-hidden bg-background py-20 md:py-28">
-        <div className="container">
-          <DifferentiatorsSection content={homeContent.differentiators} />
-        </div>
-      </section>
+      <DifferentiatorsSection content={homeContent.differentiators} variant={template} />
 
       <TestimonialsSection testimonials={testimonials} />
 
-      <CTASection />
+      {/* Immersive closes with the footer's own call-to-action band instead. */}
+      {template !== 'immersive' && <CTASection />}
 
-      <Footer />
+      <Footer variant={template} />
     </div>
   );
 }

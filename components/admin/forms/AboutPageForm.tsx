@@ -59,7 +59,7 @@ export function AboutPageForm() {
           pageType: 'about',
           content,
           metadata: {
-            seoTitle: 'About Us - Wangchuks Bhutan Tours & Treks',
+            seoTitle: 'About Us - Soul Search Tours',
             seoDescription: 'Learn about our story, values, and the team behind authentic Bhutanese travel experiences.'
           }
         })
@@ -509,7 +509,7 @@ export function AboutPageForm() {
                     label="Name"
                     value={member.name}
                     onChange={(e) => updateArrayItem('team', index, 'name', e.target.value)}
-                    placeholder="e.g., Wangchuk Dorji"
+                    placeholder="e.g., Tenzin Dorji"
                   />
 
                   <FormField

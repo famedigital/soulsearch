@@ -27,8 +27,8 @@ export type InvoiceBooking = {
 const COMPANY_DEFAULTS = {
   name: DEFAULT_COMPANY_NAME,
   tagline: DEFAULT_COMPANY_TAGLINE,
-  email: 'info@wangchuktour.com',
-  phone: '+975 17643416',
+  email: '',
+  phone: '',
   address: 'Thimphu, Bhutan',
 };
 

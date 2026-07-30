@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
       media,
       images: media,
       total: media.length,
-      folder: folder || 'wangchuk-tour',
+      folder: folder || 'soulsearch',
     });
   } catch (error) {
     console.error('Media fetch error:', error);

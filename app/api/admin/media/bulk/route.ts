@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const files = formData.getAll('files') as File[];
-    const folder = (formData.get('folder') as string) || 'wangchuk-tour';
+    const folder = (formData.get('folder') as string) || 'soulsearch';
 
     if (!files || files.length === 0) {
       return NextResponse.json({ error: 'No files provided' }, { status: 400 });

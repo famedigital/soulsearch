@@ -56,7 +56,7 @@ export function RevisionHistory({ entityType, entityId, onRollback }: RevisionHi
           old_values: { price: 2500, featured: false },
           new_values: { price: 2800, featured: true },
           user_name: 'Admin User',
-          user_email: 'admin@wangchuktour.com',
+          user_email: '',
           created_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
         },
         {
@@ -68,7 +68,7 @@ export function RevisionHistory({ entityType, entityId, onRollback }: RevisionHi
           old_values: { title: 'Cultural Triangle Tour' },
           new_values: { title: 'Cultural Triangle Experience' },
           user_name: 'Admin User',
-          user_email: 'admin@wangchuktour.com',
+          user_email: '',
           created_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
         },
         {
@@ -84,7 +84,7 @@ export function RevisionHistory({ entityType, entityId, onRollback }: RevisionHi
             is_published: true,
           },
           user_name: 'Admin User',
-          user_email: 'admin@wangchuktour.com',
+          user_email: '',
           created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
         },
         {
@@ -101,7 +101,7 @@ export function RevisionHistory({ entityType, entityId, onRollback }: RevisionHi
             category: 'cultural',
           },
           user_name: 'Admin User',
-          user_email: 'admin@wangchuktour.com',
+          user_email: '',
           created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7).toISOString(),
         },
       ];

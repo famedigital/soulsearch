@@ -32,14 +32,13 @@ export const ABOUT_DEFAULTS: AboutContent = {
     title: 'Discover the Last Shangri-La',
     subtitle:
       'Experience authentic Bhutanese culture and Himalayan landscapes with a locally owned team.',
-    backgroundImage:
-      'https://res.cloudinary.com/hckgrdeh/image/upload/v1782911267/tigernest_paro_wdenqu.jpg',
+    backgroundImage: '',
     cta: { text: 'Explore our tours', link: '/tours' },
   },
   story: {
     title: 'Our Story',
     content:
-      'Wangchuks Bhutan Tours & Treks is your gateway to experiencing the authentic beauty of Bhutan — temples, trails, and communities, guided by people who call this place home.',
+      'Soul Search Tours is your gateway to experiencing the authentic beauty of Bhutan — temples, trails, and communities, guided by people who call this place home.',
     founded: '2010',
   },
   values: [

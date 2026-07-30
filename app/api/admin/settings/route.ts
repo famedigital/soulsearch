@@ -193,6 +193,15 @@ export async function POST(request: NextRequest) {
           'Company tagline'
         );
       }
+      if (typeof seo.site_logo === 'string') {
+        await upsertSetting(
+          supabase,
+          'site_logo',
+          seo.site_logo.trim(),
+          'general',
+          'Company logo URL shown across the public site and admin'
+        );
+      }
       if (typeof seo.social_facebook === 'string') {
         await upsertSetting(
           supabase,
@@ -252,11 +261,17 @@ export async function POST(request: NextRequest) {
       revalidatePath('/');
       revalidatePath('/contact');
       revalidatePath('/', 'layout');
+      revalidatePath('/admin/login');
+      revalidatePath('/api/admin/manifest');
     }
 
     if (key === 'global_theme') {
       revalidatePath('/', 'layout');
       revalidatePath('/admin', 'layout');
+    }
+
+    if (key === 'site_template') {
+      revalidatePath('/', 'layout');
     }
 
     return NextResponse.json(result);

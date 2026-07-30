@@ -8,6 +8,9 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useCompanyBrand } from '@/hooks/use-company-brand';
 import { useWhatsAppHref } from '@/hooks/use-whatsapp-link';
+import { useSiteTemplate } from '@/components/providers/TemplateProvider';
+import { BrandMark } from '@/components/public/BrandMark';
+import type { SiteTemplateId } from '@/lib/template-config';
 
 const baseNavLinks = [
   { name: 'Home', href: '/', icon: Home },
@@ -18,8 +21,16 @@ const baseNavLinks = [
 
 type TourCategory = { name: string; slug: string };
 
-export function Navigation({ forceSolid = false }: { forceSolid?: boolean }) {
+export function Navigation({
+  forceSolid = false,
+  variant: variantOverride,
+}: {
+  forceSolid?: boolean;
+  variant?: SiteTemplateId;
+}) {
   const pathname = usePathname();
+  const template = useSiteTemplate();
+  const variant = variantOverride ?? template;
   const brand = useCompanyBrand();
   const whatsappHref = useWhatsAppHref();
   const [scrolled, setScrolled] = useState(false);
@@ -49,103 +60,169 @@ export function Navigation({ forceSolid = false }: { forceSolid?: boolean }) {
   }, []);
 
   const isToursActive = pathname === '/tours' || pathname.startsWith('/tours');
-  const navSolid = forceSolid || !mounted || scrolled;
 
-  const desktopLink = (active?: boolean) =>
+  // Aurora and Editorial always sit on a solid bar; only Immersive floats over
+  // a dark hero and swaps to a light pill once the page scrolls.
+  const onLight = variant === 'immersive' ? forceSolid || !mounted || scrolled : true;
+
+  const linkTone = (active?: boolean) =>
+    onLight
+      ? active
+        ? 'text-primary'
+        : 'text-foreground/75 hover:text-foreground'
+      : active
+        ? 'text-white'
+        : 'text-white/85 hover:text-white';
+
+  const linkClass = (active?: boolean) =>
     cn(
-      'rounded-md px-4 py-2 text-sm font-medium transition-colors',
-      navSolid
-        ? active
-          ? 'text-primary'
-          : 'text-foreground/75 hover:text-foreground'
-        : active
-          ? 'text-white'
-          : 'text-white/85 hover:text-white'
+      'rounded-md text-sm font-medium transition-colors',
+      variant === 'editorial'
+        ? 'px-3 py-2 text-[11px] tracking-[0.18em] uppercase'
+        : 'px-4 py-2',
+      linkTone(active)
     );
+
+  const toursMenu = (
+    <div
+      className="relative"
+      onMouseEnter={() => setToursOpen(true)}
+      onMouseLeave={() => setToursOpen(false)}
+    >
+      <button
+        type="button"
+        className={cn(linkClass(isToursActive), 'inline-flex items-center gap-1')}
+        onClick={() => setToursOpen((v) => !v)}
+      >
+        Tours
+        <ChevronDown className={cn('size-3.5 transition-transform', toursOpen && 'rotate-180')} />
+      </button>
+      {toursOpen && (
+        <div className="absolute top-full left-0 min-w-[13rem] pt-2">
+          <div className="overflow-hidden rounded-lg border border-border bg-card/95 py-1.5 shadow-lg backdrop-blur-xl">
+            <Link
+              href="/tours"
+              className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-primary"
+            >
+              All Tours
+            </Link>
+            {tourCategories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/tours?category=${cat.slug}`}
+                className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-primary"
+              >
+                {cat.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  const pageLinks = baseNavLinks
+    .filter((l) => l.name !== 'Home')
+    .map((link) => (
+      <Link
+        key={link.name}
+        href={link.href}
+        className={linkClass(
+          link.href === '/blog' ? pathname?.startsWith('/blog') : pathname === link.href
+        )}
+      >
+        {link.name}
+      </Link>
+    ));
+
+  const ctaClass = cn(
+    buttonVariants({ size: 'sm' }),
+    variant === 'editorial' && 'rounded-none text-[11px] tracking-[0.18em] uppercase',
+    variant === 'immersive' && 'rounded-full',
+    !onLight && 'bg-white text-foreground hover:bg-white/90'
+  );
+
+  const brandLink = (
+    <Link href="/" className="group shrink-0">
+      <BrandMark
+        name={brand.name}
+        logo={brand.logo}
+        variant={variant}
+        tone={onLight ? 'dark' : 'light'}
+        showName={!brand.logo}
+      />
+    </Link>
+  );
 
   return (
     <>
       <nav
         className={cn(
           'fixed top-0 right-0 left-0 z-50 hidden transition-[background-color,box-shadow,backdrop-filter,border-color] duration-300 lg:block',
-          navSolid
-            ? 'border-b border-border/50 bg-background/80 shadow-sm backdrop-blur-xl'
-            : 'border-b border-transparent bg-transparent'
+          variant === 'aurora' &&
+            'border-b-2 border-primary/70 bg-background/90 shadow-sm backdrop-blur-xl',
+          variant === 'editorial' && 'border-b border-border bg-background',
+          variant === 'immersive' && 'bg-transparent'
         )}
       >
-        <div className="container flex h-16 items-center justify-between xl:h-[4.5rem]">
-          <Link href="/" className="group flex items-center gap-3">
-            <img
-              src="https://res.cloudinary.com/hckgrdeh/image/upload/v1782962660/wangchukstlogo_usxclz.png"
-              alt={brand.name}
-              className="h-11 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90 xl:h-12"
-            />
-          </Link>
-
-          <div className="flex items-center gap-0.5">
-            <Link href="/" className={desktopLink(pathname === '/')}>
-              Home
-            </Link>
-
-            <div
-              className="relative"
-              onMouseEnter={() => setToursOpen(true)}
-              onMouseLeave={() => setToursOpen(false)}
-            >
-              <button
-                type="button"
-                className={cn(desktopLink(isToursActive), 'inline-flex items-center gap-1')}
-                onClick={() => setToursOpen((v) => !v)}
-              >
-                Tours <ChevronDown className={cn('size-3.5 transition-transform', toursOpen && 'rotate-180')} />
-              </button>
-              {toursOpen && (
-                <div className="absolute top-full left-0 min-w-[13rem] pt-2">
-                  <div className="overflow-hidden rounded-lg border border-border bg-card/95 py-1.5 shadow-lg backdrop-blur-xl">
-                    <Link
-                      href="/tours"
-                      className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-primary"
-                    >
-                      All Tours
-                    </Link>
-                    {tourCategories.map((cat) => (
-                      <Link
-                        key={cat.slug}
-                        href={`/tours?category=${cat.slug}`}
-                        className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-primary"
-                      >
-                        {cat.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
+        {variant === 'aurora' && (
+          <div className="container flex h-16 items-center justify-between gap-6 xl:h-[4.5rem]">
+            {brandLink}
+            <div className="flex flex-1 items-center justify-center gap-0.5">
+              <Link href="/" className={linkClass(pathname === '/')}>
+                Home
+              </Link>
+              {toursMenu}
+              {pageLinks}
             </div>
-
-            {baseNavLinks
-              .filter((l) => l.name !== 'Home')
-              .map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={desktopLink(
-                    link.href === '/blog'
-                      ? pathname?.startsWith('/blog')
-                      : pathname === link.href
-                  )}
-                >
-                  {link.name}
-                </Link>
-              ))}
-
-            <Link
-              href="/contact#contact-form"
-              className={cn(buttonVariants({ size: 'sm' }), 'ml-4')}
-            >
+            <Link href="/contact#contact-form" className={ctaClass}>
               Get Quote
             </Link>
           </div>
-        </div>
+        )}
+
+        {variant === 'editorial' && (
+          <div className="container grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-6 xl:h-[4.5rem]">
+            <div className="flex items-center gap-0.5">
+              <Link href="/" className={linkClass(pathname === '/')}>
+                Home
+              </Link>
+              {toursMenu}
+            </div>
+            {brandLink}
+            <div className="flex items-center justify-end gap-0.5">
+              {pageLinks}
+              <Link href="/contact#contact-form" className={cn(ctaClass, 'ml-3')}>
+                Enquire
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {variant === 'immersive' && (
+          <div className="container flex h-16 items-center xl:h-[4.5rem]">
+            <div
+              className={cn(
+                'flex w-full items-center justify-between gap-6 rounded-full border px-5 py-2 transition-colors duration-300',
+                onLight
+                  ? 'border-border bg-background/85 shadow-sm backdrop-blur-xl'
+                  : 'border-white/20 bg-black/25 backdrop-blur-xl'
+              )}
+            >
+              {brandLink}
+              <div className="flex items-center gap-0.5">
+                <Link href="/" className={linkClass(pathname === '/')}>
+                  Home
+                </Link>
+                {toursMenu}
+                {pageLinks}
+              </div>
+              <Link href="/contact#contact-form" className={ctaClass}>
+                Get Quote
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Mobile bottom nav */}

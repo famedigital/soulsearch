@@ -24,7 +24,7 @@ async function createAdminUser() {
 
   const adminUser = {
     id: crypto.randomUUID(),
-    email: 'admin@wangchuktour.com',
+    email: 'admin@example.com',
     name: 'Admin User',
     password_hash: password_hash,
     role: 'admin',

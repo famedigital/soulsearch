@@ -1,5 +1,5 @@
 -- =====================================================
--- QUICK DATABASE SETUP FOR WANGCHUK TOURS
+-- QUICK DATABASE SETUP FOR SOUL SEARCH TOURS
 -- Copy this entire script and run it in your Supabase SQL Editor
 -- Go to: https://supabase.com/dashboard/project/iqbwlmoadphkuewubszd/sql
 -- =====================================================
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- =====================================================
 INSERT INTO admin_users (email, password_hash, name, role, is_active, email_verified)
 VALUES (
-  'admin@wangchuktour.com',
+  'admin@example.com',
   '$2b$12$HgtvGJqEgu3DKhvRbmPFP.rkixdtzcEr31F5HvgcoxjuDVSEp4rZu',
   'Admin User',
   'super_admin',
@@ -159,7 +159,7 @@ DO $$
 BEGIN
   RAISE NOTICE '✅ DATABASE SETUP COMPLETE!';
   RAISE NOTICE '👤 Admin user created:';
-  RAISE NOTICE '   Email: admin@wangchuktour.com';
+  RAISE NOTICE '   Email: admin@example.com';
   RAISE NOTICE '   Password: Admin@123';
   RAISE NOTICE '   Login at: http://localhost:3000/admin/login';
   RAISE NOTICE '';

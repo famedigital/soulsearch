@@ -172,7 +172,7 @@ export function CrmAlertsForm() {
             label=""
             value={settings.crm_alert_email}
             onChange={(e) => setSettings((s) => ({ ...s, crm_alert_email: e.target.value }))}
-            placeholder="you@wangchuktour.com"
+            placeholder=""
           />
         </div>
       </div>

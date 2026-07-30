@@ -4,22 +4,26 @@ import { useEffect, useState } from 'react';
 import {
   DEFAULT_COMPANY_NAME,
   DEFAULT_COMPANY_TAGLINE,
+  DEFAULT_SITE_LOGO,
   normalizeCompanyName,
+  normalizeSiteLogo,
 } from '@/lib/brand-defaults';
 
-type BrandInfo = {
+export type BrandInfo = {
   name: string;
   tagline: string;
+  logo: string;
 };
 
 /**
- * Client hook — company name from Admin → SEO → Company name (CRM).
+ * Client hook — company name + logo from Admin → SEO.
  * Starts with the canonical default so legacy CRM values don't flash wrong.
  */
 export function useCompanyBrand(): BrandInfo {
   const [brand, setBrand] = useState<BrandInfo>({
     name: DEFAULT_COMPANY_NAME,
     tagline: DEFAULT_COMPANY_TAGLINE,
+    logo: DEFAULT_SITE_LOGO,
   });
 
   useEffect(() => {
@@ -32,6 +36,7 @@ export function useCompanyBrand(): BrandInfo {
           name: normalizeCompanyName(data.name),
           tagline:
             String(data.tagline || DEFAULT_COMPANY_TAGLINE).trim() || DEFAULT_COMPANY_TAGLINE,
+          logo: normalizeSiteLogo(data.logo),
         });
       })
       .catch(() => {

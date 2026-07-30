@@ -62,7 +62,7 @@ Or use URL placeholders: `...?phone={phone}&text={message}`
    SMTP_PORT=587
    SMTP_USER=your@gmail.com
    SMTP_PASS=xxxx xxxx xxxx xxxx
-   EMAIL_FROM=Wangchuks Bhutan Tours <your@gmail.com>
+   EMAIL_FROM=Soul Search Tours <your@gmail.com>
    CRM_ALERT_EMAIL=your@gmail.com
    ```
 4. Redeploy
@@ -73,8 +73,8 @@ Works for contact auto-reply, CRM alert emails, and admin password reset.
 
 ```
 RESEND_API_KEY=...
-EMAIL_FROM=Wangchuks Bhutan Tours <onboarding@resend.dev>
-CRM_ALERT_EMAIL=you@wangchuktour.com
+EMAIL_FROM=Soul Search Tours <onboarding@resend.dev>
+CRM_ALERT_EMAIL=
 ```
 
 (or set the alert email in Admin → CRM alerts)
@@ -94,5 +94,5 @@ Alerts never block the customer form — if WhatsApp fails, the lead is still sa
 CRM_ALERTS_ENABLED=true
 CRM_ALERT_WHATSAPP=+97517643416
 CRM_ALERT_EMAIL=you@email.com
-NEXT_PUBLIC_SITE_URL=https://www.wangchuksbhutantours.bt
+NEXT_PUBLIC_SITE_URL=https://soulsearch-beta.vercel.app
 ```

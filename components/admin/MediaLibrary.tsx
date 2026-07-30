@@ -94,7 +94,7 @@ export function MediaLibrary() {
       for (const file of Array.from(files)) {
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('folder', 'wangchuk-tour');
+        formData.append('folder', 'soulsearch');
         const response = await authFetch('/api/upload', { method: 'POST', body: formData });
         if (!response.ok) {
           const err = await response.json().catch(() => ({}));

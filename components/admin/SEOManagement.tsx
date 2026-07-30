@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Save, Globe, Mail, Phone, MapPin, Check, X, Search, Image as ImageIcon, FileText, Code2, Shield } from 'lucide-react';
 import { normalizeCompanyName } from '@/lib/brand-defaults';
+import { MediaPickerModal } from '@/components/admin/MediaPickerModal';
+import { Button } from '@/components/ui/button';
 
 interface SEOSettings {
   // Site Info
@@ -10,6 +12,7 @@ interface SEOSettings {
   site_tagline: string;
   site_description: string;
   site_url: string;
+  site_logo: string;
 
   // Contact Info
   contact_email: string;
@@ -65,32 +68,33 @@ interface SEOSettings {
 
 export function SEOManagement() {
   const [settings, setSettings] = useState<SEOSettings>({
-    site_name: 'Wangchuks Bhutan Tours & Treks',
+    site_name: 'Soul Search Tours',
     site_tagline: 'Discover the Last Shangri-La',
     site_description: 'Experience authentic Bhutanese culture, breathtaking Himalayan landscapes, and spiritual journeys that will transform your soul.',
-    site_url: 'https://wangchuktour.com',
-    contact_email: 'info@wangchuktour.com',
-    contact_phone: '+975 2 327654',
+    site_url: 'https://soulsearch-beta.vercel.app',
+    site_logo: '',
+    contact_email: '',
+    contact_phone: '',
     contact_address: 'Thimphu, Bhutan',
     contact_city: 'Thimphu',
     contact_country: 'Bhutan',
     contact_timezone: 'Asia/Thimphu',
-    social_facebook: 'https://facebook.com/wangchuktour',
-    social_instagram: 'https://instagram.com/wangchuktour',
+    social_facebook: '',
+    social_instagram: '',
     social_twitter: '',
     social_linkedin: '',
-    seo_title_template: '{title} | Wangchuks Bhutan Tours & Treks',
+    seo_title_template: '{title} | Soul Search Tours',
     seo_description_template: '{description}',
     seo_keywords: 'Bhutan tours, trekking in Bhutan, cultural tours Bhutan, Bhutan travel, Himalaya tours, Buddhist festivals, Tiger\'s Nest',
     seo_robots: 'index, follow',
-    seo_canonical: 'https://wangchuktour.com',
-    og_title: 'Wangchuks Bhutan Tours & Treks',
+    seo_canonical: 'https://soulsearch-beta.vercel.app',
+    og_title: 'Soul Search Tours',
     og_description: 'Experience authentic Bhutanese culture, breathtaking Himalayan landscapes, and spiritual journeys.',
     og_image: '',
     og_type: 'website',
     twitter_card: 'summary_large_image',
-    twitter_site: '@wangchuktour',
-    twitter_creator: '@wangchuktour',
+    twitter_site: '',
+    twitter_creator: '',
     schema_organization: '',
     schema_website: '',
     schema_localbusiness: '',
@@ -108,6 +112,7 @@ export function SEOManagement() {
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('general');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [logoPickerOpen, setLogoPickerOpen] = useState(false);
 
   useEffect(() => {
     fetchSettings();
@@ -131,6 +136,7 @@ export function SEOManagement() {
             data.settings.site_name || blob.site_name || prev.site_name
           ),
           site_tagline: data.settings.site_tagline || blob.site_tagline || prev.site_tagline,
+          site_logo: data.settings.site_logo || blob.site_logo || prev.site_logo,
           social_facebook:
             data.settings.social_facebook || blob.social_facebook || prev.social_facebook,
           social_instagram:
@@ -280,6 +286,41 @@ export function SEOManagement() {
                 </div>
 
                 <div>
+                  <label className="block text-sm font-medium mb-2">Company logo</label>
+                  <div className="flex flex-wrap items-center gap-4 rounded-xl border border-dashed border-border bg-muted/40 p-4">
+                    {settings.site_logo ? (
+                      <img
+                        src={settings.site_logo}
+                        alt="Company logo"
+                        className="h-16 w-auto max-w-[12rem] object-contain"
+                      />
+                    ) : (
+                      <div className="flex h-16 w-28 items-center justify-center rounded-md bg-muted text-xs text-muted-foreground">
+                        No logo
+                      </div>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                      <Button type="button" variant="outline" onClick={() => setLogoPickerOpen(true)}>
+                        {settings.site_logo ? 'Change logo' : 'Upload logo'}
+                      </Button>
+                      {settings.site_logo && (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          onClick={() => updateSetting('site_logo', '')}
+                        >
+                          Remove
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Used for the public site, admin login, sidebar, favicon, and installable admin
+                    app icon. PNG or SVG with a transparent background works best.
+                  </p>
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium mb-2">Site Description</label>
                   <textarea
                     value={settings.site_description}
@@ -298,7 +339,7 @@ export function SEOManagement() {
                     value={settings.site_url}
                     onChange={(e) => updateSetting('site_url', e.target.value)}
                     className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                    placeholder="https://wangchuktour.com"
+                    placeholder="https://soulsearch-beta.vercel.app"
                   />
                 </div>
 
@@ -379,7 +420,7 @@ export function SEOManagement() {
                       value={settings.seo_title_template}
                       onChange={(e) => updateSetting('seo_title_template', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="{title} | Wangchuks Bhutan Tours & Treks"
+                      placeholder="{title} | Soul Search Tours"
                     />
                     <p className="text-xs text-gray-500 mt-1">Use {'{title}'} for page title</p>
                   </div>
@@ -425,7 +466,7 @@ export function SEOManagement() {
                       value={settings.seo_canonical}
                       onChange={(e) => updateSetting('seo_canonical', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="https://wangchuktour.com"
+                      placeholder="https://soulsearch-beta.vercel.app"
                     />
                   </div>
                 </div>
@@ -458,7 +499,7 @@ export function SEOManagement() {
                       value={settings.social_facebook}
                       onChange={(e) => updateSetting('social_facebook', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="https://facebook.com/wangchuktour"
+                      placeholder=""
                     />
                   </div>
                   <div>
@@ -471,7 +512,7 @@ export function SEOManagement() {
                       value={settings.social_instagram}
                       onChange={(e) => updateSetting('social_instagram', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="https://instagram.com/wangchuktour"
+                      placeholder=""
                     />
                   </div>
                   <div>
@@ -484,7 +525,7 @@ export function SEOManagement() {
                       value={settings.social_twitter}
                       onChange={(e) => updateSetting('social_twitter', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="https://twitter.com/wangchuktour"
+                      placeholder=""
                     />
                   </div>
                 </div>
@@ -559,7 +600,7 @@ export function SEOManagement() {
                       value={settings.twitter_site}
                       onChange={(e) => updateSetting('twitter_site', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="@wangchuktour"
+                      placeholder=""
                     />
                   </div>
                   <div>
@@ -569,7 +610,7 @@ export function SEOManagement() {
                       value={settings.twitter_creator}
                       onChange={(e) => updateSetting('twitter_creator', e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="@wangchuktour"
+                      placeholder=""
                     />
                   </div>
                 </div>
@@ -595,7 +636,7 @@ export function SEOManagement() {
                     onChange={(e) => updateSetting('schema_organization', e.target.value)}
                     rows={6}
                     className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm"
-                    placeholder='{"@context": "https://schema.org", "@type": "Organization", "name": "Wangchuks Bhutan Tours & Treks"}'
+                    placeholder='{"@context": "https://schema.org", "@type": "Organization", "name": "Soul Search Tours"}'
                   />
                   <p className="text-xs text-gray-500 mt-1">JSON-LD format for organization information</p>
                 </div>
@@ -607,7 +648,7 @@ export function SEOManagement() {
                     onChange={(e) => updateSetting('schema_website', e.target.value)}
                     rows={6}
                     className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm"
-                    placeholder='{"@context": "https://schema.org", "@type": "WebSite", "url": "https://wangchuktour.com"}'
+                    placeholder='{"@context": "https://schema.org", "@type": "WebSite", "url": "https://soulsearch-beta.vercel.app"}'
                   />
                 </div>
 
@@ -785,6 +826,18 @@ export function SEOManagement() {
           </div>
         </div>
       )}
+
+      <MediaPickerModal
+        isOpen={logoPickerOpen}
+        onClose={() => setLogoPickerOpen(false)}
+        onSelect={(media) => {
+          const item = Array.isArray(media) ? media[0] : media
+          if (item?.secure_url || item?.url) {
+            updateSetting('site_logo', item.secure_url || item.url)
+          }
+          setLogoPickerOpen(false)
+        }}
+      />
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AdminSidebar } from './AdminSidebar';
 import { AdminHeader } from './AdminHeader';
+import { SetupProgressBanner } from '@/components/admin/setup/SetupProgressBanner';
 import { useRouter } from 'next/navigation';
 import type { AdminUser } from '@/lib/auth/rbac';
 import { Button } from '@/components/ui/button';
@@ -159,6 +160,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           onMobileMenuOpen={() => setIsMobileSidebarOpen(true)}
         />
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 pb-20 md:p-6 md:pb-6">
+          <SetupProgressBanner variant="banner" />
           {children}
         </main>
       </div>
