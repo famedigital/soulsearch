@@ -254,6 +254,11 @@ export async function POST(request: NextRequest) {
       revalidatePath('/', 'layout');
     }
 
+    if (key === 'global_theme') {
+      revalidatePath('/', 'layout');
+      revalidatePath('/admin', 'layout');
+    }
+
     return NextResponse.json(result);
   } catch (error) {
     console.error('Settings update error:', error);

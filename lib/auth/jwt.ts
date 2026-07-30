@@ -28,7 +28,15 @@ export interface AuthTokens {
  */
 export function generateAccessToken(payload: TokenPayload): string {
   try {
-    return jwt.sign(payload, JWT_SECRET, {
+    // Strip any existing JWT claims (exp/iat/nbf) so expiresIn can be set cleanly.
+    const cleanPayload: TokenPayload = {
+      userId: payload.userId,
+      email: payload.email,
+      role: payload.role,
+      name: payload.name,
+      permissions: Array.isArray(payload.permissions) ? payload.permissions : [],
+    };
+    return jwt.sign(cleanPayload, JWT_SECRET, {
       expiresIn: JWT_EXPIRES_IN,
     });
   } catch (error) {
@@ -42,7 +50,14 @@ export function generateAccessToken(payload: TokenPayload): string {
  */
 export function generateRefreshToken(payload: TokenPayload): string {
   try {
-    return jwt.sign(payload, JWT_SECRET, {
+    const cleanPayload: TokenPayload = {
+      userId: payload.userId,
+      email: payload.email,
+      role: payload.role,
+      name: payload.name,
+      permissions: Array.isArray(payload.permissions) ? payload.permissions : [],
+    };
+    return jwt.sign(cleanPayload, JWT_SECRET, {
       expiresIn: REFRESH_TOKEN_EXPIRES_IN,
     });
   } catch (error) {

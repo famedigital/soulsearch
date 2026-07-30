@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils';
 import { buildSocialMetadata, SITE_DESCRIPTION, SITE_NAME } from '@/lib/seo';
 import { getCompanyName } from '@/lib/brand';
 import { DEFAULT_COMPANY_NAME } from '@/lib/brand-defaults';
+import { getHomePageContent } from '@/lib/content/get-home';
 
 export async function generateMetadata(): Promise<Metadata> {
   const company = await getCompanyName();
@@ -65,10 +66,11 @@ const fallbackTestimonials = [
 ];
 
 export default async function HomePage() {
-  const [featuredTours, heroSlides, dbTestimonials] = await Promise.all([
+  const [featuredTours, heroSlides, dbTestimonials, homeContent] = await Promise.all([
     getFeaturedTours(),
     getActiveHeroSlides(),
     getFeaturedTestimonials(),
+    getHomePageContent(),
   ]);
 
   const testimonials =
@@ -94,13 +96,13 @@ export default async function HomePage() {
           <ScrollReveal>
             <div className="mb-14 max-w-2xl md:mb-16">
               <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                Curated experiences
+                {homeContent.featured.eyebrow}
               </p>
               <h2 className="font-accent text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
-                Featured journeys
+                {homeContent.featured.title}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-                Our most loved experiences, crafted with care and attention to every detail.
+                {homeContent.featured.subtitle}
               </p>
             </div>
           </ScrollReveal>
@@ -137,7 +139,7 @@ export default async function HomePage() {
       {/* Why choose us */}
       <section className="relative overflow-hidden bg-background py-20 md:py-28">
         <div className="container">
-          <DifferentiatorsSection />
+          <DifferentiatorsSection content={homeContent.differentiators} />
         </div>
       </section>
 

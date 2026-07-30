@@ -24,6 +24,7 @@ import {
   PanelLeftClose,
   PanelLeft,
   BookOpen,
+  Palette,
 } from 'lucide-react';
 import type { AdminUser } from '@/lib/auth/rbac';
 import { Button } from '@/components/ui/button';
@@ -61,6 +62,7 @@ const navigationSections: { title: string; items: NavItem[] }[] = [
     title: 'Website content',
     items: [
       { id: 'hero', label: 'Hero slides', icon: Images, href: '/admin/hero' },
+      { id: 'homepage', label: 'Homepage', icon: Home, href: '/admin/homepage' },
       { id: 'tours', label: 'Tours', icon: MapPin, href: '/admin/tours' },
       { id: 'blog', label: 'Blog', icon: FileText, href: '/admin/blog' },
       { id: 'media', label: 'Media library', icon: Image, href: '/admin/media' },
@@ -100,6 +102,7 @@ const navigationSections: { title: string; items: NavItem[] }[] = [
         label: 'Settings',
         icon: Settings,
         children: [
+          { id: 'theme', label: 'Color theme', icon: Palette, href: '/admin/settings/theme' },
           { id: 'general', label: 'Contact & general', icon: Settings, href: '/admin/settings/general' },
           { id: 'site', label: 'About page', icon: Home, href: '/admin/settings/site' },
           { id: 'navigation', label: 'SEO', icon: Search, href: '/admin/settings/navigation' },

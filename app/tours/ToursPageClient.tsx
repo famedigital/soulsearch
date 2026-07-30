@@ -73,10 +73,10 @@ export function ToursPageClient({ tours }: { tours: any[] }) {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Navigation />
+      <Navigation forceSolid />
 
-      <main className="flex-1">
-        <section className="border-b border-border bg-muted/30 pt-32 pb-16 md:pt-40 md:pb-20">
+      <main className="flex-1 pt-16 xl:pt-[4.5rem]">
+        <section className="border-b border-border bg-muted/30 pt-16 pb-16 md:pt-20 md:pb-20">
           <div className="container">
             <ScrollReveal>
               <div className="mb-10 max-w-2xl md:mb-12">

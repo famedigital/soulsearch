@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import type { CSSProperties } from "react";
 import { Plus_Jakarta_Sans, Inter, Playfair_Display, Geist } from "next/font/google";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,8 @@ import {
 } from "@/lib/seo";
 import { getCompanyName } from "@/lib/brand";
 import { DEFAULT_COMPANY_NAME } from "@/lib/brand-defaults";
+import { getGlobalTheme } from "@/lib/theme";
+import { themeToCssVariables } from "@/lib/theme-config";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
@@ -92,20 +95,27 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = {
-  themeColor: "#9f1239",
-  width: "device-width",
-  initialScale: 1,
-};
+export async function generateViewport(): Promise<Viewport> {
+  const theme = await getGlobalTheme();
+  return {
+    themeColor: theme.primary,
+    width: "device-width",
+    initialScale: 1,
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = await getGlobalTheme();
+  const themeStyle = themeToCssVariables(theme) as CSSProperties;
+
   return (
     <html
       lang="en"
+      style={themeStyle}
       className={cn(
         "h-full antialiased font-sans",
         geist.variable,

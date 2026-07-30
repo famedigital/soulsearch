@@ -354,10 +354,18 @@ function HeroSlideForm({
 
       <div className="border-2 border-dashed border-border rounded-lg p-4 text-center space-y-3">
         {formData.image_url ? (
-          <img src={formData.image_url} alt="Preview" className="max-h-40 mx-auto rounded-lg object-cover" />
+          <img
+            src={formData.image_url}
+            alt="Preview"
+            className="mx-auto max-h-40 rounded-lg object-cover object-top"
+          />
         ) : (
           <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
         )}
+        <p className="text-xs text-muted-foreground">
+          Use a wide landscape photo. The homepage fills the screen and keeps the top of the image
+          visible (not zoomed into the center).
+        </p>
         <p className="text-sm text-muted-foreground">
           {formData.image_url ? 'Hero image selected' : 'Select a hero image from Media Library'}
         </p>

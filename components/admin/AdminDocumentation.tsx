@@ -49,8 +49,19 @@ const cmsGuides = [
     steps: [
       'Add or edit homepage slideshow images and headlines.',
       'Upload images from Media library (Cloudinary) for best quality and speed.',
+      'Prefer wide landscape photos (about 1920×1080). The site fills the screen and keeps the top of the photo visible.',
       'Set CTA button text and link (e.g. “Explore tours” → /tours).',
       'Toggle Active so only finished slides appear on the live site.',
+    ],
+  },
+  {
+    title: 'Homepage',
+    href: '/admin/homepage',
+    icon: Home,
+    steps: [
+      'Edit Featured journeys headings and The Soul Search Difference section.',
+      'Change titles, descriptions, and icons — then Save changes.',
+      'Open the public homepage to confirm the updated text.',
     ],
   },
   {

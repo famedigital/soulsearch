@@ -161,10 +161,9 @@ export function HeroSlideshow({
             <img
               src={optimizeImageUrl(slide.image_url)}
               alt={slide.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
               loading={index === 0 ? 'eager' : 'lazy'}
               fetchPriority={index === 0 ? 'high' : 'auto'}
-              style={{ objectPosition: 'center 35%' }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/25" />
           </motion.div>

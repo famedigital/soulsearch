@@ -117,7 +117,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
 
     return (
       <div className="flex min-h-screen flex-col bg-background">
-        <Navigation />
+        <Navigation forceSolid />
         <main className="flex flex-1 items-center justify-center">
           <div className="px-6 py-20 text-center">
             <div className="mx-auto max-w-md">
@@ -167,7 +167,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
   if (tour.tour_type === 'custom') {
     return (
       <div className="flex min-h-screen flex-col bg-background">
-        <Navigation />
+        <Navigation forceSolid />
         <main className="flex-1">
           <section className="bg-background py-32">
             <div className="container">
@@ -211,7 +211,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Navigation />
+      <Navigation forceSolid />
 
       <main className="flex-1">
         {/* Hero */}

@@ -181,6 +181,9 @@ export async function POST(request: NextRequest) {
       revalidatePath('/', 'layout');
     } else if (pageType === 'about') {
       revalidatePath('/about');
+    } else if (pageType === 'home') {
+      revalidatePath('/');
+      revalidatePath('/', 'layout');
     }
 
     return NextResponse.json({
@@ -204,6 +207,44 @@ function getDefaultContent(pageType: string) {
       statistics: [],
       timeline: [],
       team: []
+    },
+    home: {
+      differentiators: {
+        eyebrow: 'Why Choose Us',
+        title: 'The Soul Search',
+        titleAccent: 'Difference',
+        items: [
+          {
+            icon: 'Heart',
+            title: 'Local Expertise',
+            description:
+              'Bhutanese-led journeys with deep knowledge of every trail, temple, and community.',
+          },
+          {
+            icon: 'Shield',
+            title: 'Authentic Experiences',
+            description:
+              'No tourist traps. Genuine culture, real communities, and meaningful connections.',
+          },
+          {
+            icon: 'Mountain',
+            title: 'Sustainable Tourism',
+            description:
+              'Responsible travel that respects the environment and preserves cultural heritage.',
+          },
+          {
+            icon: 'Clock',
+            title: '24/7 Support',
+            description:
+              'Always available to assist you throughout your journey, from planning to departure.',
+          },
+        ],
+      },
+      featured: {
+        eyebrow: 'Curated experiences',
+        title: 'Featured journeys',
+        subtitle: 'Our most loved experiences, crafted with care and attention to every detail.',
+      },
     },
     contact: {
       hero: { title: 'Contact Us', subtitle: 'Get in touch' },

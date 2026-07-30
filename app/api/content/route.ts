@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { mergeAboutContent } from '@/lib/content/about';
 import { CONTACT_DEFAULTS, mergeContactContent } from '@/lib/content/contact';
+import { mergeHomeContent } from '@/lib/content/home';
 
 export const dynamic = 'force-dynamic';
 
@@ -81,12 +82,16 @@ function normalizePublicContent(pageType: string, raw: unknown) {
   if (pageType === 'contact') {
     return mergeContactContent(raw);
   }
+  if (pageType === 'home') {
+    return mergeHomeContent(raw);
+  }
   return raw || getDefaultContent(pageType);
 }
 
 function getDefaultContent(pageType: string) {
   const defaults: Record<string, any> = {
     about: mergeAboutContent(null),
+    home: mergeHomeContent(null),
     contact: {
       ...CONTACT_DEFAULTS,
       socialMedia: {
